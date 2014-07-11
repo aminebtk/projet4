@@ -27,8 +27,6 @@ public class ProcTokenRingFrame extends JFrame {
 	private JTextField textFieldIP;
 	private JTextField textFieldPort;
 	private JTextField textFieldID;
-	private JLabel labelIDProcP;
-	private JLabel lblProcPrecedent;
 	private JLabel labelIDProcN;
 	private ProcTokenRingBean mybrean;
 	private JLabel lblMessage;
@@ -43,7 +41,7 @@ public class ProcTokenRingFrame extends JFrame {
 	public ProcTokenRingFrame(ProcTokenRingBean mybrean, ActionListener controller) {
 		this.mybrean = mybrean;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(10, -167+ (mybrean.getID()*177), 450, 177);
+		setBounds(10, -167+ (((mybrean.getID() < 5) ? mybrean.getID() : 1 )*177), 450, 177);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -104,17 +102,6 @@ public class ProcTokenRingFrame extends JFrame {
 		labelIDProcN.setBounds(107, 87, 35, 20);
 		panel.add(labelIDProcN);
 		
-		labelIDProcP = new JLabel("0");
-		labelIDProcP.setHorizontalAlignment(SwingConstants.RIGHT);
-		labelIDProcP.setFont(new Font("Tahoma", Font.BOLD, 12));
-		labelIDProcP.setBounds(276, 88, 35, 20);
-		panel.add(labelIDProcP);
-		
-		lblProcPrecedent = new JLabel("Proc precedent  :");
-		lblProcPrecedent.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblProcPrecedent.setBounds(321, 88, 93, 20);
-		panel.add(lblProcPrecedent);
-		
 		chckbxJeVeuxLe = new JCheckBox("Je veux le Token");
 		chckbxJeVeuxLe.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		chckbxJeVeuxLe.addActionListener(controller);
@@ -148,10 +135,7 @@ public class ProcTokenRingFrame extends JFrame {
 	public void setNextProcID(int id) {
 		labelIDProcN.setText(String.valueOf(id));
 	}
-	public void setPreviousProcID(int id) {
-		labelIDProcP.setText(String.valueOf(id));
-	}
-	
+
 	public void update(){
 		textFieldID.setText(String.valueOf(mybrean.getID()));
 		textFieldIP.setText(mybrean.getIp());
