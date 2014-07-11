@@ -6,32 +6,50 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.sql.Date;
+import java.sql.Timestamp;
+
+import Util.Cts;
 import beans.ProcTokenRingBean;
 
 
-public class ReceptionTokenRing implements Runnable {
+public class ReceptionTokenRing extends Thread {
 
 	private BufferedReader in;
-	private Socket socket;
+	private static Socket socket = null;
 	private ServerSocket socketserver;
 	private ProcTokenRingBean myBean;
+	private ProcTokenRing procTokenRing;
 
-	public ReceptionTokenRing(BufferedReader in, ProcTokenRingBean myBean){
+	public ReceptionTokenRing(ProcTokenRingBean myBean, ProcTokenRing procTokenRing){
+		this.procTokenRing = procTokenRing;
 		this.myBean = myBean;
-		listen();
-	}
-
-
-	public void listen(){
-
-		System.out.println("J'ecoute : "+  myBean.toString());
 		try {
 			socketserver = new ServerSocket(myBean.getPort());
-			socket = socketserver.accept();
-		} catch (UnknownHostException e1) {
+			System.out.println("J'ecoute : "+  myBean.toString());
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e.printStackTrace();
+		}
+	}
+	public void closePort(){
+		try {
+			socketserver.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void listen(){
+
+		try {
+			socket = socketserver.accept();
+			System.out.println("Process connecté : " + myBean.getID());
+		} catch (SocketException e1) {
+			System.out.println("Socket close");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -43,30 +61,21 @@ public class ReceptionTokenRing implements Runnable {
 			e.printStackTrace();
 		}
 
-		this.in = in;
-		run();
-
 	}
 	public void run() {
-		/*		String commandLine;
+		listen();
+		String commandLine;
 		try {
 			while ((commandLine = in.readLine()) != null){
 				String[] commandes = commandLine.split("#");
 				int commandeType = Integer.valueOf(commandes[0]);
 				switch (commandeType){
-				case Cts.NEWIDSUCC :
-					succursale.getSuccursaleBean().setIdSucc(Integer.valueOf(commandes[1]));
-					succursale.getInterfaceSuccursale().refesh();
-					succursale.ConnectToInterm();
-					break;
-				case Cts.SUSCRIBE_SUCCURSALE :
-					SuccursaleBean s = new SuccursaleBean(Integer.valueOf(commandes[1])
-							,(commandes[2])
-							,Integer.valueOf(commandes[3])
-							,Integer.valueOf(commandes[4]));
-					//System.out.println(s.getIdSucc() + "|" + succursale.getSuccursaleBean().getIdSucc());
-					succursale.addSuccusale(s);
-					//System.out.println("Commande addSuccusale!");
+				case Cts.TOKEN :
+					System.out.println("Proc () " + myBean.getID() + " - Token recu de la part du : " + commandes[1]);
+					java.util.Date date= new java.util.Date();
+					procTokenRing.getInterface().setMessage("Token recu de la part du : " + commandes[1] + " | " + new Timestamp(date.getTime())  );
+					procTokenRing.setJAiLeToken(true);
+					procTokenRing.sendTokenToNeext();
 					break;
 				default:
 					System.out.println("Commande introuvable!");
@@ -78,7 +87,7 @@ public class ReceptionTokenRing implements Runnable {
 		} catch (IOException e) {
 			System.out.println("Erreur IOException 2");
 			e.printStackTrace();
-		}*/
+		}
 
 	}
 

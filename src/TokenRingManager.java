@@ -17,28 +17,35 @@ public class TokenRingManager implements ActionListener {
 		listTokenRingProc = new ArrayList<ProcTokenRing>();
 	}
 
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
 		if(arg0.getActionCommand().equals("ajouterProc")){
+			
 			if(listTokenRingProc.isEmpty()){
 				ProcTokenRing p = new ProcTokenRing((listTokenRingProc.size()+1), 
 						interfaceCreator.getIP(), interfaceCreator.getPort(), null, null);
-				
+
 				listTokenRingProc.add(p);
 
 			}else if (listTokenRingProc.size()==1) {
+				
+				ProcTokenRing pp = new ProcTokenRing();
+				pp =listTokenRingProc.get(0);
 
 				ProcTokenRing p = new ProcTokenRing((listTokenRingProc.size()+1), 
 						interfaceCreator.getIP(), interfaceCreator.getPort(), 
-						listTokenRingProc.get(0).getMyBean() , listTokenRingProc.get(0).getMyBean());
-				listTokenRingProc.get(0).setNextProcTokebRing(p.getMyBean());
-				listTokenRingProc.get(0).createSender();
+						pp.getMyBean() , pp.getMyBean());
+				
+				pp.setNextProcTokebRing(p.getMyBean());
+			//	pp.setPreviousProcTokebRing(p.getMyBean());
+				p.startReception();
+				pp.startReception();
+				p.startEmission();
+				pp.startEmission();
 				listTokenRingProc.add(p);
 
 			}else{
-
 
 				ProcTokenRing pp = new ProcTokenRing();
 				ProcTokenRing pn = new ProcTokenRing();
@@ -50,13 +57,24 @@ public class TokenRingManager implements ActionListener {
 						pn.getMyBean() , pp.getMyBean());
 
 				pp.setNextProcTokebRing(p.getMyBean());
-				pn.setPreviousProcTokebRing(p.getMyBean());
-
+				p.setNextProcTokebRing(pn.getMyBean());
+				pn.startReception();
+				p.startReception();
+				pp.startReception();
+				pp.startEmission();
+				p.startEmission();
 				listTokenRingProc.add(p);
 
 			}
 
+		}else if(arg0.getActionCommand().equals("lancerToken")){
+			if(listTokenRingProc.size()>1){
+				listTokenRingProc.get(0).sendTokenToNeext();
+			}
+			
 		}
+		
+		interfaceCreator.setPort(Integer.valueOf(interfaceCreator.getPort())+1);
 
 	}
 }

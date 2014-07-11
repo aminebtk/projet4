@@ -19,9 +19,7 @@ a l'instanciantation de la class, elle envoi a la banque une demande pour avoir 
 
 ******************************************************/ 
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -29,13 +27,13 @@ import java.net.UnknownHostException;
 import beans.ProcTokenRingBean;
 
 
-public class EmissionProcTokenRing implements Runnable {
+public class EmissionProcTokenRing {
 
 	private PrintWriter out;
 	private Socket socket;
 	//private Succursale succursale;
 
-	public EmissionProcTokenRing(PrintWriter out, ProcTokenRingBean nextProcTokebRingBean) {
+	public EmissionProcTokenRing(ProcTokenRingBean nextProcTokebRingBean) {
 		
 		try {
 			socket = new Socket( nextProcTokebRingBean.getIp() ,nextProcTokebRingBean.getPort());
@@ -53,12 +51,11 @@ public class EmissionProcTokenRing implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.out = out;
 	}
 
 	public void run() {
 		//out.println(Cts.AJOUT_SUCCURSALE+"#"+succursale.getSuccursaleBean().getIp()+"#"+succursale.getSuccursaleBean().getPortEcoute()+"#"+succursale.getSuccursaleBean().getMontantDepart());  
-		out.flush();
+		//out.flush();
 	}
 
 	public void EnvoyerMessage(String message){

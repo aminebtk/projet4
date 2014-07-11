@@ -1,50 +1,51 @@
 package ProcessusTokenRing;
 
 
-import java.io.BufferedReader;
-import java.io.PrintWriter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import Util.Cts;
 import beans.ProcTokenRingBean;
 
 
-public class ProcTokenRing {
 
-	private BufferedReader in = null;
-	private PrintWriter out = null;
+public class ProcTokenRing implements ActionListener {
 
 
 	private ProcTokenRingBean myBean;
+	private Boolean JeVeuxToken = false;
+	private Boolean JAiLeToken = false;
 	private ProcTokenRingBean nextProcTokebRingBean;
-	private ProcTokenRingBean previousProcTokebRingBean;
+	//private ProcTokenRingBean previousProcTokebRingBean;
 	private ReceptionTokenRing listnerProc;
 	private EmissionProcTokenRing senderProc;
+	private ProcTokenRingFrame procTokenRingFrame;
 
 	public ProcTokenRing(int id, String AdresseIp, int Port, ProcTokenRingBean n, ProcTokenRingBean p){
-		setNextProcTokebRing(n);
-		setPreviousProcTokebRing(p);
 		setMyBean(new ProcTokenRingBean(id, AdresseIp, Port));
-		run();
+		procTokenRingFrame = new ProcTokenRingFrame(getMyBean(), this);
+		procTokenRingFrame.update();
+		setNextProcTokebRing(n);
+		//setPreviousProcTokebRing(p);
+		System.out.println(getMyBean().toString());
 	}
 
 	public ProcTokenRing() {
 		// TODO Auto-generated constructor stub
 	}
 
-	private void run() {
+	public void startReception() {
 
-		Thread t3 = new Thread(listnerProc = new ReceptionTokenRing(in, myBean));
-		t3.start();
-		if(getNextProcTokebRing()!=null){
-			createSender();
-		}
+		if(listnerProc!=null)
+			closePort();
+		listnerProc = new ReceptionTokenRing(myBean, this);
+		listnerProc.start();
 	}
 
-
-	public void createSender(){
-		Thread t4 = new Thread(senderProc = new EmissionProcTokenRing(out, nextProcTokebRingBean));
-		t4.start();	
-
+	public void startEmission(){
+		senderProc = new EmissionProcTokenRing(nextProcTokebRingBean);
 	}
+
 	public ReceptionTokenRing getListnerProc() {
 		return listnerProc;
 	}
@@ -58,16 +59,11 @@ public class ProcTokenRing {
 	}
 
 	public void setNextProcTokebRing(ProcTokenRingBean nextProcTokebRing) {
+		if(nextProcTokebRing!=null)
+			procTokenRingFrame.setNextProcID(nextProcTokebRing.getID());
 		this.nextProcTokebRingBean = nextProcTokebRing;
 	}
 
-	public ProcTokenRingBean getPreviousProcTokebRing() {
-		return previousProcTokebRingBean;
-	}
-
-	public void setPreviousProcTokebRing(ProcTokenRingBean previousProcTokebRing) {
-		this.previousProcTokebRingBean = previousProcTokebRing;
-	}
 
 	public ProcTokenRingBean getMyBean() {
 		return myBean;
@@ -77,10 +73,56 @@ public class ProcTokenRing {
 		this.myBean = myBean;
 	}
 
-	// This void is called only for the first Proc,
-	// because the first proc has no next and previous ProcBeans
-	public void connectFirtProc(){
-		run();
+	public void closePort() {
+
+		if(listnerProc!=null)
+			listnerProc.closePort();
+
+	}
+
+	public void sendTokenToNeext() {
+		if(!jeVeuxToken()){
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String message = String.valueOf(Cts.TOKEN)+"#"+getMyBean().getID();
+			getSenderProc().EnvoyerMessage(message);
+			setJAiLeToken(false);	
+		}
+
+	}
+
+	public ProcTokenRingFrame getInterface() {
+		// TODO Auto-generated method stub
+		return procTokenRingFrame;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		if(arg0.getActionCommand().equals("JeVeuxToken")){
+			JeVeuxToken = procTokenRingFrame.getIsTokenChecked();
+		}
+		
+		if(!JeVeuxToken && getJAiLeToken())
+			sendTokenToNeext();
+				
+	}
+
+	public Boolean jeVeuxToken(){
+		return JeVeuxToken;
+	}
+
+	public Boolean getJAiLeToken() {
+		return JAiLeToken;
+	}
+
+	public void setJAiLeToken(Boolean jAiLeToken1) {
+		JAiLeToken = jAiLeToken1;
+		procTokenRingFrame.setLabelJAiLeToken(JAiLeToken);
 	}
 
 }

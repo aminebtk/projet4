@@ -81,16 +81,23 @@ public class TokenRingProcCreator extends JFrame {
 		btnNewButton.addActionListener(controller);
 		btnNewButton.setActionCommand("ajouterProc");
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 10));
-		btnNewButton.setBounds(150, 106, 134, 35);
+		btnNewButton.setBounds(150, 106, 134, 27);
 		panel.add(btnNewButton);
 
 		labelError = new JLabel("");
 		labelError.setForeground(Color.RED);
 		labelError.setFont(new Font("Tahoma", Font.BOLD, 10));
-		labelError.setBounds(10, 152, 365, 16);
+		labelError.setBounds(10, 184, 365, 16);
 		panel.add(labelError);
+		
+		JButton btnLancerToken = new JButton("Lancer Token");
+		btnLancerToken.addActionListener(controller);
+		btnLancerToken.setActionCommand("lancerToken");
+		btnLancerToken.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnLancerToken.setBounds(150, 146, 134, 27);
+		panel.add(btnLancerToken);
 		setTitle("Créer Processus");
-		setSize(401, 206);
+		setSize(401, 238);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
@@ -119,5 +126,10 @@ public class TokenRingProcCreator extends JFrame {
 
 	public int getPort() {
 		return Integer.valueOf(textFieldPort.getText());
+	}
+
+	public void setPort(int i) {
+		textFieldPort.setText(String.valueOf(i));
+		
 	}
 }
