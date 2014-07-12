@@ -47,7 +47,7 @@ public class ReceptionRessource extends Thread {
 
 		try {
 			socket = socketserver.accept();
-			System.out.println("Process connecté : 1" );
+			System.out.println("Process connectï¿½ : 1" );
 		} catch (SocketException e1) {
 			System.out.println("Socket close");
 		} catch (IOException e1) {
@@ -67,7 +67,18 @@ public class ReceptionRessource extends Thread {
 		String commandLine;
 		try {
 			while ((commandLine = in.readLine()) != null){
-			
+				String[] commandes = commandLine.split("#");
+				int commandeType = Integer.valueOf(commandes[0]);
+				switch (commandeType){
+				case Cts.LIBERER_RESSOURCE :
+					System.out.println("la ressource est liberee par  " + commandes[1]);
+					break;
+				case Cts.RESERVER_RESSOURCE :
+					System.out.println("la ressource est reservee par  " + commandes[1]);
+					break;
+				default:
+					System.out.println("Commande introuvable!");
+				}
 			}
 		} catch (NumberFormatException e) {
 			System.out.println("Erreur NumberFormatException");
