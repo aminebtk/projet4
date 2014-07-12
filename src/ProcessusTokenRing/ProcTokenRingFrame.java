@@ -40,6 +40,7 @@ public class ProcTokenRingFrame extends JFrame {
 	 */
 	public ProcTokenRingFrame(ProcTokenRingBean mybrean, ActionListener controller) {
 		this.mybrean = mybrean;
+		setTitle("Processus : " + mybrean.getID());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(10, -167+ (((mybrean.getID() < 5) ? mybrean.getID() : 1 )*177), 450, 177);
 		contentPane = new JPanel();
@@ -128,7 +129,14 @@ public class ProcTokenRingFrame extends JFrame {
 
 
 	public void setLabelJAiLeToken(Boolean labelJAiLeToken1) {
-		labelJAiLeToken.setText(labelJAiLeToken1.toString());
+		if(labelJAiLeToken1){
+			labelJAiLeToken.setForeground(Color.green);
+			labelJAiLeToken.setText(labelJAiLeToken1.toString());
+		}else{
+			labelJAiLeToken.setForeground(Color.red);
+			labelJAiLeToken.setText(labelJAiLeToken1.toString());
+		}
+			
 	}
 
 
