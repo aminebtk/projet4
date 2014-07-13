@@ -19,10 +19,8 @@ Interface graphique offrant la possibilité a l'utilisateur d'interagir avec l'ap
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -116,6 +114,7 @@ public class TokenRingProcCreator extends JFrame {
 		return true;
 	}
 
+	@SuppressWarnings("unused")
 	private void showError(String s){
 		labelError.setText(s);
 	}
@@ -130,6 +129,5 @@ public class TokenRingProcCreator extends JFrame {
 
 	public void setPort(int i) {
 		textFieldPort.setText(String.valueOf(i));
-		
 	}
 }

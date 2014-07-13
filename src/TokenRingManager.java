@@ -66,7 +66,7 @@ public class TokenRingManager implements ActionListener {
 				listTokenRingProc.add(p);
 
 			}
-
+			interfaceCreator.setPort(Integer.valueOf(interfaceCreator.getPort())+1);
 		}else if(arg0.getActionCommand().equals("lancerToken")){
 			if(listTokenRingProc.size()>1){
 				listTokenRingProc.get(0).sendTokenToNeext();
@@ -74,7 +74,7 @@ public class TokenRingManager implements ActionListener {
 			
 		}
 		
-		interfaceCreator.setPort(Integer.valueOf(interfaceCreator.getPort())+1);
+		
 
 	}
 }
