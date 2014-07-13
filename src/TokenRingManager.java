@@ -21,15 +21,16 @@ public class TokenRingManager implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 
 		if(arg0.getActionCommand().equals("ajouterProc")){
-			
+			interfaceCreator.getBtnLancerToken().setEnabled(false);
 			if(listTokenRingProc.isEmpty()){
+				
 				ProcTokenRing p = new ProcTokenRing((listTokenRingProc.size()+1), 
 						interfaceCreator.getIP(), interfaceCreator.getPort(), null, null);
 
 				listTokenRingProc.add(p);
 
 			}else if (listTokenRingProc.size()==1) {
-				
+				interfaceCreator.getBtnLancerToken().setEnabled(true);
 				ProcTokenRing pp = new ProcTokenRing();
 				pp =listTokenRingProc.get(0);
 
@@ -46,7 +47,7 @@ public class TokenRingManager implements ActionListener {
 				listTokenRingProc.add(p);
 
 			}else{
-
+				interfaceCreator.getBtnLancerToken().setEnabled(true);
 				ProcTokenRing pp = new ProcTokenRing();
 				ProcTokenRing pn = new ProcTokenRing();
 				pp = listTokenRingProc.get(listTokenRingProc.size()-1);
@@ -68,11 +69,9 @@ public class TokenRingManager implements ActionListener {
 			}
 			interfaceCreator.setPort(Integer.valueOf(interfaceCreator.getPort())+1);
 		}else if(arg0.getActionCommand().equals("lancerToken")){
-			if(listTokenRingProc.size()>1){
+			if(listTokenRingProc.size()>1)
 				listTokenRingProc.get(0).sendTokenToNeext();
 			}
-			
-		}
 		
 		
 

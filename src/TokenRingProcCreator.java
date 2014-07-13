@@ -36,6 +36,7 @@ public class TokenRingProcCreator extends JFrame {
 	private JTextField textFieldIP;
 	private JTextField textFieldPort;
 	private JLabel labelError;
+	private JButton btnLancerToken;
 
 	public TokenRingProcCreator(ActionListener controller) {
 		initUI(controller);
@@ -88,11 +89,12 @@ public class TokenRingProcCreator extends JFrame {
 		labelError.setBounds(10, 184, 365, 16);
 		panel.add(labelError);
 		
-		JButton btnLancerToken = new JButton("Lancer Token");
+		btnLancerToken = new JButton("Lancer Token");
 		btnLancerToken.addActionListener(controller);
 		btnLancerToken.setActionCommand("lancerToken");
 		btnLancerToken.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnLancerToken.setBounds(150, 146, 134, 27);
+		btnLancerToken.setEnabled(false);
 		panel.add(btnLancerToken);
 		setTitle("Créer Processus");
 		setSize(401, 238);
@@ -130,4 +132,10 @@ public class TokenRingProcCreator extends JFrame {
 	public void setPort(int i) {
 		textFieldPort.setText(String.valueOf(i));
 	}
+
+	public JButton getBtnLancerToken( ) {
+		return this.btnLancerToken ;
+	}
+	
+	
 }
