@@ -137,6 +137,5 @@ public class TokenRingProcCreator extends JFrame {
 		return this.btnLancerToken ;
 	}
 	
-
+	
 }
-

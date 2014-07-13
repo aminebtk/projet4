@@ -4,7 +4,6 @@ public class Ressource {
 	
 	private int port;
 	private String ip;
-
 	private ReceptionRessource reception;
 	private InterfaceRessource interfaceR;
 	

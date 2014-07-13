@@ -20,7 +20,6 @@ public class ReceptionRessource extends Thread {
 	private BufferedReader in;
 	private static Socket socket = null;
 	private ServerSocket socketserver;
-
 	private int port;
 	private InterfaceRessource interfaceR;
 
@@ -79,7 +78,6 @@ public class ReceptionRessource extends Thread {
 				case Cts.RESERVER_RESSOURCE :
 					System.out.println("la ressource est reservee par  " + commandes[1]);
 					interfaceR.ajouterReservation(commandes[1]);
-
 					break;
 				default:
 					System.out.println("Commande introuvable!");
