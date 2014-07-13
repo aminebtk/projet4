@@ -1,5 +1,6 @@
 package ressources;
 
+
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -67,4 +68,6 @@ public class InterfaceRessource extends JFrame{
 		
 		lblPro.setText("Aucun");
 	}
+	
 }
+
