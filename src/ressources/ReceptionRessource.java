@@ -81,7 +81,10 @@ public class ReceptionRessource extends Thread {
 					interfaceR.ajouterReservation(commandes[1]);
 
 					break;
-				default:
+				case Cts.PRINT_RESSOURCE :
+					interfaceR.printMessage(commandes[1]);
+					break;
+					default:
 					System.out.println("Commande introuvable!");
 				}
 			}

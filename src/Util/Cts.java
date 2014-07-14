@@ -6,6 +6,7 @@ public class Cts {
 	public static final int TOKEN = 1;
 	public static final int RESERVER_RESSOURCE = 2;
 	public static final int LIBERER_RESSOURCE = 3;
+	public static final int PRINT_RESSOURCE = 4;
 	
 	
 	

@@ -72,6 +72,13 @@ public class EmissionProcRessource {
 		out.flush();
 	}
 	
+	public void printInRessource(String message){
+		String message2 = Cts.PRINT_RESSOURCE + "#" + message ;
+		out.println(message2);  
+		out.flush();
+	}
+	
+	
 	public static EmissionProcRessource getInstance(){
 		if(instance==null)
 				instance = new EmissionProcRessource();

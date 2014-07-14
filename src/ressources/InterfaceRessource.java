@@ -33,14 +33,14 @@ public class InterfaceRessource extends JFrame{
 		getContentPane().add(panel);
 		panel.setLayout(null);
 
-		JLabel label = new JLabel("L'imprimante est utilis\u00E9e par PROCESSUS :  ");
+		JLabel label = new JLabel("L'imprimante est  :  ");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label.setBounds(10, 11, 207, 14);
 		panel.add(label);
 
-		lblPro = new JLabel("PRO");
+		lblPro = new JLabel("Disponible");
 		lblPro.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblPro.setForeground(Color.RED);
+		lblPro.setForeground(Color.GREEN);
 		lblPro.setBounds(10, 36, 201, 14);
 		panel.add(lblPro);
 
@@ -61,12 +61,18 @@ public class InterfaceRessource extends JFrame{
 
 	public void ajouterReservation(String string) {
 		Date n = new Date();
-		listModel.add(0,string + " - " +  n.toString()  );
+		listModel.add(listModel.getSize(),string + " - " +  n.toString()  );
+		
+		lblPro.setText("utilis\u00E9e par PROCESSUS " + string);
+		lblPro.setForeground(Color.RED);
+	}
+	public void printMessage(String string) {
+		listModel.add(listModel.getSize(),string  );
 
-		lblPro.setText(string);
 	}
 
 	public void libererReservation() {
-		lblPro.setText("Aucun");
+		lblPro.setForeground(Color.GREEN);
+		lblPro.setText("Disponible");
 	}
 }
