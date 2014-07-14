@@ -128,6 +128,7 @@ public class ProcTokenRingFrame extends JFrame {
 
 	public void setLabelJAiLeToken(Boolean labelJAiLeToken1) {
 
+
 		if(labelJAiLeToken1){
 			labelJAiLeToken.setForeground(Color.green);
 
@@ -136,6 +137,7 @@ public class ProcTokenRingFrame extends JFrame {
 			labelJAiLeToken.setText(labelJAiLeToken1.toString());
 		}
 		labelJAiLeToken.setText(labelJAiLeToken1.toString());	
+
 
 	}
 
