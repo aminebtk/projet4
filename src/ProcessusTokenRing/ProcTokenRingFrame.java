@@ -45,8 +45,8 @@ public class ProcTokenRingFrame extends JFrame {
 	public ProcTokenRingFrame(ProcTokenRingBean mybrean, ActionListener controller) {
 		this.mybrean = mybrean;
 		setTitle("Processus : " + mybrean.getID());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(10, -167+ (((mybrean.getID() < 5) ? mybrean.getID() : 1 )*177), 492, 283);
+		setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
+		setBounds(10, -167+ (((mybrean.getID() < 3) ? mybrean.getID() : 1 )*280), 492, 283);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -64,7 +64,6 @@ public class ProcTokenRingFrame extends JFrame {
 		panel.add(textFieldIP);
 
 		textFieldPort = new JTextField();
-
 		textFieldPort.setColumns(10);
 		textFieldPort.setBounds(152, 57, 57, 19);
 		panel.add(textFieldPort);
