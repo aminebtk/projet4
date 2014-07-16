@@ -1,11 +1,11 @@
-package ProcessusTokenRing;
+package tokenRing.Processus;
 
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import tokenRing.beans.ProcTokenRingBean;
 import Util.Cts;
-import beans.ProcTokenRingBean;
 
 
 

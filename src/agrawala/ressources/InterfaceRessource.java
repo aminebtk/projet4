@@ -1,4 +1,4 @@
-package ressources;
+package agrawala.ressources;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
