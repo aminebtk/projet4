@@ -1,4 +1,4 @@
-package agrawala.Processus;
+package agrawala.processus;
 
 
 import java.io.BufferedReader;
@@ -45,7 +45,7 @@ public class ReceptionfromProc extends Thread {
 
 		try {
 			socket = socketserver.accept();
-			System.out.println("Process connecté : " + myBean.getID());
+			System.out.println("Process connectï¿½ : " + myBean.getID());
 		} catch (SocketException e1) {
 			System.out.println("Socket close");
 		} catch (IOException e1) {

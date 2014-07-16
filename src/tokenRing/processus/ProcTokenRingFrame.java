@@ -1,12 +1,10 @@
-package agrawala.Processus;
+package tokenRing.processus;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,20 +12,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
-import agrawala.beans.ProcAgrawalaBean;
-
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.AbstractAction;
-import java.awt.event.ActionEvent;
-import javax.swing.Action;
-import javax.swing.JRadioButton;
-import javax.swing.JList;
-import javax.swing.ListModel;
-import javax.swing.border.LineBorder;
 
-public class ProcAgrawalaFrame extends JFrame {
+import java.awt.event.ActionEvent;
+
+import javax.swing.Action;
+
+import tokenRing.beans.ProcTokenRingBean;
+
+public class ProcTokenRingFrame extends JFrame {
 
 	/**
 	 * 
@@ -37,19 +32,23 @@ public class ProcAgrawalaFrame extends JFrame {
 	private JTextField textFieldIP;
 	private JTextField textFieldPort;
 	private JTextField textFieldID;
-	private ProcAgrawalaBean mybrean;
+	private JLabel labelIDProcN;
+	private ProcTokenRingBean mybrean;
 	private JLabel lblMessage;
+	private JCheckBox chckbxJeVeuxLe;
+	private JLabel lblJaiToken;
+	private JLabel labelJAiLeToken;
 	private JTextArea textArea;
 	private JButton btnPrint;
 
 	/**
 	 * Create the frame.
 	 */
-	public ProcAgrawalaFrame(ProcAgrawalaBean mybrean, ActionListener controller) {
+	public ProcTokenRingFrame(ProcTokenRingBean mybrean, ActionListener controller) {
 		this.mybrean = mybrean;
 		setTitle("Processus : " + mybrean.getID());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(10, -167+ (((mybrean.getID() < 5) ? mybrean.getID() : 1 )*177), 617, 290);
+		setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
+		setBounds(10, -167+ (((mybrean.getID() < 3) ? mybrean.getID() : 1 )*280), 492, 283);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -67,7 +66,6 @@ public class ProcAgrawalaFrame extends JFrame {
 		panel.add(textFieldIP);
 
 		textFieldPort = new JTextField();
-
 		textFieldPort.setColumns(10);
 		textFieldPort.setBounds(152, 57, 57, 19);
 		panel.add(textFieldPort);
@@ -85,7 +83,7 @@ public class ProcAgrawalaFrame extends JFrame {
 		lblMessage = new JLabel("Message : ");
 		lblMessage.setForeground(Color.RED);
 		lblMessage.setFont(new Font("Tahoma", Font.BOLD, 10));
-		lblMessage.setBounds(10, 215, 404, 16);
+		lblMessage.setBounds(10, 208, 404, 16);
 		panel.add(lblMessage);
 
 		textFieldID = new JTextField();
@@ -99,53 +97,46 @@ public class ProcAgrawalaFrame extends JFrame {
 		lblId.setBounds(117, 10, 35, 20);
 		panel.add(lblId);
 
-		JLabel lblProcSuivant = new JLabel("Etat du processus");
+		JLabel lblProcSuivant = new JLabel("Proc Suivant :");
 		lblProcSuivant.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblProcSuivant.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblProcSuivant.setBounds(0, 87, 132, 20);
+		lblProcSuivant.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblProcSuivant.setBounds(10, 88, 86, 20);
 		panel.add(lblProcSuivant);
+
+		labelIDProcN = new JLabel("0");
+		labelIDProcN.setFont(new Font("Tahoma", Font.BOLD, 12));
+		labelIDProcN.setBounds(107, 87, 35, 20);
+		panel.add(labelIDProcN);
+
+		chckbxJeVeuxLe = new JCheckBox("Je veux le Token");
+		chckbxJeVeuxLe.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		chckbxJeVeuxLe.addActionListener(controller);
+		chckbxJeVeuxLe.setActionCommand("JeVeuxToken");
+
+		chckbxJeVeuxLe.setBounds(276, 0, 138, 23);
+		panel.add(chckbxJeVeuxLe);
+
+		lblJaiToken = new JLabel("J'ai Token :");
+		lblJaiToken.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblJaiToken.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblJaiToken.setBounds(134, 88, 86, 20);
+		panel.add(lblJaiToken);
+
+		labelJAiLeToken = new JLabel("");
+		labelJAiLeToken.setHorizontalAlignment(SwingConstants.CENTER);
+		labelJAiLeToken.setForeground(Color.RED);
+		labelJAiLeToken.setFont(new Font("Tahoma", Font.BOLD, 12));
+		labelJAiLeToken.setBounds(231, 87, 35, 20);
+		panel.add(labelJAiLeToken);
 		
 		textArea = new JTextArea();
-		textArea.setBounds(10, 119, 273, 85);
+		textArea.setBounds(10, 119, 345, 85);
 		panel.add(textArea);
 		
 		btnPrint = new JButton("Imprimer");
 		btnPrint.addActionListener(controller);
-		btnPrint.setBounds(293, 138, 91, 49);
+		btnPrint.setBounds(365, 136, 91, 49);
 		panel.add(btnPrint);
-		
-		JRadioButton rdbtnHeld = new JRadioButton("Held");
-		rdbtnHeld.addActionListener(controller);
-		rdbtnHeld.setBounds(146, 87, 83, 23);
-		panel.add(rdbtnHeld);
-		
-		JRadioButton rdbtnRelease = new JRadioButton("Release");
-		rdbtnRelease.addActionListener(controller);
-		rdbtnRelease.setBounds(231, 87, 90, 23);
-		panel.add(rdbtnRelease);
-		
-		JRadioButton rdbtnWait = new JRadioButton("Wait");
-		rdbtnWait.addActionListener(controller);
-		rdbtnWait.setBounds(323, 86, 57, 23);
-		panel.add(rdbtnWait);
-		
-		 ButtonGroup group = new ButtonGroup();
-		group.add(rdbtnHeld);
-		group.add(rdbtnRelease);
-		group.add(rdbtnWait);
-		
-		
-		DefaultListModel<String> listModel = new DefaultListModel<String> ();
-		JList<String> list = new JList<String>(listModel);
-		list.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		list.setBounds(394, 58, 194, 154);
-		panel.add(list);
-		
-		JLabel lblListOfProcessus = new JLabel("List of processus");
-		lblListOfProcessus.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblListOfProcessus.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblListOfProcessus.setBounds(395, 33, 132, 20);
-		panel.add(lblListOfProcessus);
 		
 		disablePrint();
 
@@ -154,10 +145,25 @@ public class ProcAgrawalaFrame extends JFrame {
 	}
 
 
+	public void setLabelJAiLeToken(Boolean labelJAiLeToken1) {
 
 
+		if(labelJAiLeToken1){
+			labelJAiLeToken.setForeground(Color.green);
+
+		}else{
+			labelJAiLeToken.setForeground(Color.red);
+			labelJAiLeToken.setText(labelJAiLeToken1.toString());
+		}
+		labelJAiLeToken.setText(labelJAiLeToken1.toString());	
 
 
+	}
+
+
+	public void setNextProcID(int id) {
+		labelIDProcN.setText(String.valueOf(id));
+	}
 
 	public void update(){
 		textFieldID.setText(String.valueOf(mybrean.getID()));
@@ -173,7 +179,10 @@ public class ProcAgrawalaFrame extends JFrame {
 		return textArea.getText().toString();
 	}
 
-
+	public Boolean getIsTokenChecked() {
+		// TODO Auto-generated method stub
+		return chckbxJeVeuxLe.isSelected() ;
+	}
 
 
 	public void enablePrint() {
@@ -193,4 +202,6 @@ public class ProcAgrawalaFrame extends JFrame {
 		textArea.setText("");
 		
 	}
+	
+
 }

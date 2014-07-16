@@ -1,4 +1,4 @@
-package tokenRing.Processus;
+package tokenRing.processus;
 /******************************************************
 	Cours :           LOG730
 	Session :         �t� 2010

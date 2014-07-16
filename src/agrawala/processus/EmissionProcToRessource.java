@@ -1,10 +1,10 @@
-package agrawala.Processus;
+package agrawala.processus;
 /******************************************************
 	Cours :           LOG730
-	Session :         Été 2010
+	Session :         ï¿½tï¿½ 2010
 	Groupe :          01
 	Projet :          Laboratoire #3
-	Date création :   2014-07-01
+	Date crï¿½ation :   2014-07-01
 	Etudiant(e)(s) :    Mohamed Zibouli
 						Amine Boutkhil
 						Hicham Ouchker
@@ -24,19 +24,21 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import Util.Cts;
 import agrawala.beans.ProcAgrawalaBean;
 
 
-public class EmissionBetweenProc {
+public class EmissionProcToRessource {
 
+	private static EmissionProcToRessource instance;
 	private PrintWriter out;
 	private Socket socket;
 	//private Succursale succursale;
 
-	public EmissionBetweenProc(ProcAgrawalaBean nextProcTokebRingBean) {
+	public EmissionProcToRessource() {
 		
 		try {
-			socket = new Socket( nextProcTokebRingBean.getIp() ,nextProcTokebRingBean.getPort());
+			socket = new Socket( Cts.IP_RESSOURCE ,Cts.PORT_RESSOURCE);
 		} catch (UnknownHostException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -58,8 +60,29 @@ public class EmissionBetweenProc {
 		//out.flush();
 	}
 
-	public void EnvoyerMessage(String message){
+	public void reserverRessource(int idP){
+		String message = Cts.RESERVER_RESSOURCE + "#" + idP ;
 		out.println(message);  
 		out.flush();
 	}
+
+	public void libererRessource(int idP){
+		String message = Cts.LIBERER_RESSOURCE + "#" + idP ;
+		out.println(message);  
+		out.flush();
+	}
+	
+	public void printInRessource(String message){
+		String message2 = Cts.PRINT_RESSOURCE + "#" + message ;
+		out.println(message2);  
+		out.flush();
+	}
+	
+	
+	public static EmissionProcToRessource getInstance(){
+		if(instance==null)
+				instance = new EmissionProcToRessource();
+		return instance;
+	} 
+	
 }

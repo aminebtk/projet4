@@ -1,4 +1,4 @@
-package tokenRing.Processus;
+package tokenRing.processus;
 
 
 import java.io.BufferedReader;

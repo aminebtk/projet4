@@ -1,4 +1,4 @@
-package tokenRing.Processus;
+package agrawala.processus;
 /******************************************************
 	Cours :           LOG730
 	Session :         �t� 2010
@@ -24,16 +24,16 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import tokenRing.beans.ProcTokenRingBean;
+import agrawala.beans.ProcAgrawalaBean;
 
 
-public class EmissionProcTokenRing {
+public class EmissionBetweenProc {
 
 	private PrintWriter out;
 	private Socket socket;
 	//private Succursale succursale;
 
-	public EmissionProcTokenRing(ProcTokenRingBean nextProcTokebRingBean) {
+	public EmissionBetweenProc(ProcAgrawalaBean nextProcTokebRingBean) {
 		
 		try {
 			socket = new Socket( nextProcTokebRingBean.getIp() ,nextProcTokebRingBean.getPort());
