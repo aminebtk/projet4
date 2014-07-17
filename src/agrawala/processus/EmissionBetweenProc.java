@@ -1,10 +1,10 @@
-package ProcessusTokenRing;
+package agrawala.processus;
 /******************************************************
 	Cours :           LOG730
-	Session :         Été 2010
+	Session :         ï¿½tï¿½ 2010
 	Groupe :          01
 	Projet :          Laboratoire #3
-	Date création :   2014-07-01
+	Date crï¿½ation :   2014-07-01
 	Etudiant(e)(s) :    Mohamed Zibouli
 						Amine Boutkhil
 						Hicham Ouchker
@@ -24,16 +24,16 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import beans.ProcTokenRingBean;
+import agrawala.beans.ProcAgrawalaBean;
 
 
-public class EmissionProcTokenRing {
+public class EmissionBetweenProc {
 
 	private PrintWriter out;
 	private Socket socket;
 	//private Succursale succursale;
 
-	public EmissionProcTokenRing(ProcTokenRingBean nextProcTokebRingBean) {
+	public EmissionBetweenProc(ProcAgrawalaBean nextProcTokebRingBean) {
 		
 		try {
 			socket = new Socket( nextProcTokebRingBean.getIp() ,nextProcTokebRingBean.getPort());

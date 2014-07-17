@@ -1,6 +1,8 @@
+package tokenRing.main;
 import Util.Cts;
-import ressources.Ressource;
-import tokenRing.main.TokenRingManager;
+import tokenRing.ressources.InterfaceRessource;
+import tokenRing.ressources.ReceptionRessource;
+import tokenRing.ressources.Ressource;
 
 public class main {
 

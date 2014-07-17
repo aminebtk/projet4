@@ -1,15 +1,15 @@
-package beans;
+package agrawala.beans;
 
 
 
-public class ProcTokenRingBean {
+public class ProcAgrawalaBean {
 
 	private int port;
 
 	private String ip;
 	private int ID;
 	
-	public ProcTokenRingBean(int id, String AdresseIp, int Port){
+	public ProcAgrawalaBean(int id, String AdresseIp, int Port){
 		this.ID = id;
 		this.ip = AdresseIp;
 		this.port = Port;

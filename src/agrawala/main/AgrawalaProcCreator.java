@@ -1,3 +1,4 @@
+package agrawala.main;
 /******************************************************
 	Cours :           LOG730
 	Session :         Été 2010
@@ -27,7 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class TokenRingProcCreator extends JFrame {
+public class AgrawalaProcCreator extends JFrame {
 
 	/**
 	 * 
@@ -38,7 +39,7 @@ public class TokenRingProcCreator extends JFrame {
 	private JLabel labelError;
 	private JButton btnLancerToken;
 
-	public TokenRingProcCreator(ActionListener controller) {
+	public AgrawalaProcCreator(ActionListener controller) {
 		initUI(controller);
 	}
 

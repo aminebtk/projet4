@@ -1,4 +1,4 @@
-package ProcessusTokenRing;
+package agrawala.processus;
 
 
 import java.io.BufferedReader;
@@ -10,18 +10,18 @@ import java.net.SocketException;
 import java.sql.Timestamp;
 
 import Util.Cts;
-import beans.ProcTokenRingBean;
+import agrawala.beans.ProcAgrawalaBean;
 
 
-public class ReceptionTokenRing extends Thread {
+public class ReceptionfromProc extends Thread {
 
 	private BufferedReader in;
 	private static Socket socket = null;
 	private ServerSocket socketserver;
-	private ProcTokenRingBean myBean;
-	private ProcTokenRing procTokenRing;
+	private ProcAgrawalaBean myBean;
+	private ProcAgrawala procTokenRing;
 
-	public ReceptionTokenRing(ProcTokenRingBean myBean, ProcTokenRing procTokenRing){
+	public ReceptionfromProc(ProcAgrawalaBean myBean, ProcAgrawala procTokenRing){
 		this.procTokenRing = procTokenRing;
 		this.myBean = myBean;
 		try {
@@ -45,7 +45,7 @@ public class ReceptionTokenRing extends Thread {
 
 		try {
 			socket = socketserver.accept();
-			System.out.println("Process connecté : " + myBean.getID());
+			System.out.println("Process connectï¿½ : " + myBean.getID());
 		} catch (SocketException e1) {
 			System.out.println("Socket close");
 		} catch (IOException e1) {
@@ -72,8 +72,8 @@ public class ReceptionTokenRing extends Thread {
 					System.out.println("Proc () " + myBean.getID() + " - Token recu de la part du : " + commandes[1]);
 					java.util.Date date= new java.util.Date();
 					procTokenRing.getInterface().setMessage("Token recu de la part du : " + commandes[1] + " | " + new Timestamp(date.getTime())  );
-					procTokenRing.setJAiLeToken(true);
-					procTokenRing.sendTokenToNeext();
+					
+					//procTokenRing.sendTokenToNeext();
 					break;
 				default:
 					System.out.println("Commande introuvable!");

@@ -1,14 +1,11 @@
-package ProcessusTokenRing;
+package tokenRing.processus;
 
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Util.Cts;
 import tokenRing.beans.ProcTokenRingBean;
-import tokenRing.processus.EmissionProcTokenRing;
-import tokenRing.processus.ProcTokenRingFrame;
-import tokenRing.processus.ReceptionTokenRing;
+import Util.Cts;
 
 
 
@@ -100,6 +97,9 @@ public class ProcTokenRing implements ActionListener {
 			setJAiLeToken(false);	
 			if(getJaiRessource())
 				e.libererRessource(getMyBean().getID());
+		
+
+				
 
 		}else{
 			e = new  EmissionProcRessource();
@@ -120,11 +120,20 @@ public class ProcTokenRing implements ActionListener {
 		// TODO Auto-generated method stub
 		if(arg0.getActionCommand().equals("JeVeuxToken")){
 			JeVeuxToken = procTokenRingFrame.getIsTokenChecked();
+			procTokenRingFrame.enablePrint();
+	
 		}
-
-		if(!JeVeuxToken && getJAiLeToken())
+		if(!JeVeuxToken && getJAiLeToken()){
 			sendTokenToNeext();
-
+			procTokenRingFrame.disablePrint();
+	
+		}
+			
+		if(arg0.getActionCommand().equals("Imprimer")){
+			
+			e.printInRessource(procTokenRingFrame.gettxtAreaMessage());
+			procTokenRingFrame.resetAreaText();
+	}
 	}
 
 	public Boolean jeVeuxToken(){
@@ -146,6 +155,8 @@ public class ProcTokenRing implements ActionListener {
 
 	public void setJaiRessource(Boolean jaiRessource) {
 		JaiRessource = jaiRessource;
+		
+
 	}
 
 }

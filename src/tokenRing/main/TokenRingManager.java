@@ -1,8 +1,9 @@
+package tokenRing.main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import ProcessusTokenRing.ProcTokenRing;
+import tokenRing.processus.ProcTokenRing;
 
 
 
