@@ -3,7 +3,6 @@ package ressources;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
@@ -12,12 +11,15 @@ import java.awt.Font;
 import java.util.Date;
 
 import javax.swing.JList;
-import javax.swing.ListModel;
 import javax.swing.border.LineBorder;
 
 
 public class InterfaceRessource extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5023068492863942995L;
 	DefaultListModel<String>   listModel;
 	private JLabel lblPro;
 
@@ -38,7 +40,7 @@ public class InterfaceRessource extends JFrame{
 		label.setBounds(10, 11, 207, 14);
 		panel.add(label);
 
-		lblPro = new JLabel("PRO");
+		lblPro = new JLabel("AUCUN");
 		lblPro.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblPro.setForeground(Color.RED);
 		lblPro.setBounds(10, 36, 201, 14);

@@ -25,7 +25,6 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import Util.Cts;
-import beans.ProcTokenRingBean;
 
 
 public class EmissionProcRessource {

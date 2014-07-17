@@ -96,7 +96,6 @@ public class ProcTokenRing implements ActionListener {
 			getSenderProc().EnvoyerMessage(message);
 			setJAiLeToken(false);	
 			if(getJaiRessource())
-
 				e.libererRessource(getMyBean().getID());
 
 		}else{

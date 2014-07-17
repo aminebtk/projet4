@@ -4,6 +4,7 @@ public class Ressource {
 	
 	private int port;
 	private String ip;
+	@SuppressWarnings("unused")
 	private ReceptionRessource reception;
 	private InterfaceRessource interfaceR;
 	

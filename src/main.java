@@ -1,6 +1,4 @@
 import Util.Cts;
-import ressources.InterfaceRessource;
-import ressources.ReceptionRessource;
 import ressources.Ressource;
 
 public class main {
