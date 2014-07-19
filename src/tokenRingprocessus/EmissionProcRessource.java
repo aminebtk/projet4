@@ -1,4 +1,4 @@
-package ProcessusTokenRing;
+package tokenRingprocessus;
 /******************************************************
 	Cours :           LOG730
 	Session :         �t� 2010
@@ -24,6 +24,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import tokenRingBeans.ProcTokenRingBean;
 import Util.Cts;
 
 
@@ -70,6 +71,13 @@ public class EmissionProcRessource {
 		out.println(message);  
 		out.flush();
 	}
+	
+	public void printInRessource(String message){
+		String message2 = Cts.PRINT_RESSOURCE + "#" + message ;
+		out.println(message2);  
+		out.flush();
+	}
+	
 	
 	public static EmissionProcRessource getInstance(){
 		if(instance==null)

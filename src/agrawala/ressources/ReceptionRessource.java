@@ -11,8 +11,7 @@ import java.net.UnknownHostException;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import tokenRing.ressources.InterfaceRessource;
-
+import tokenRingRessources.InterfaceRessource;
 import Util.Cts;
 import agrawala.beans.ProcAgrawalaBean;
 

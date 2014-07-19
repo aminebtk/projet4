@@ -1,4 +1,4 @@
-package tokenRing.processus;
+package tokenRingprocessus;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,10 +17,12 @@ import javax.swing.JButton;
 import javax.swing.AbstractAction;
 
 import java.awt.event.ActionEvent;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.swing.Action;
 
-import tokenRing.beans.ProcTokenRingBean;
+import tokenRingBeans.ProcTokenRingBean;
 
 public class ProcTokenRingFrame extends JFrame {
 
@@ -38,8 +40,7 @@ public class ProcTokenRingFrame extends JFrame {
 	private JCheckBox chckbxJeVeuxLe;
 	private JLabel lblJaiToken;
 	private JLabel labelJAiLeToken;
-	private JTextArea textArea;
-	private JButton btnPrint;
+	private JLabel labelAttente;
 
 	/**
 	 * Create the frame.
@@ -48,7 +49,7 @@ public class ProcTokenRingFrame extends JFrame {
 		this.mybrean = mybrean;
 		setTitle("Processus : " + mybrean.getID());
 		setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
-		setBounds(10, -167+ (((mybrean.getID() < 3) ? mybrean.getID() : 1 )*280), 492, 283);
+		setBounds(10, -167+ (((mybrean.getID() < 3) ? mybrean.getID() : 1 )*280), 437, 175);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -62,7 +63,7 @@ public class ProcTokenRingFrame extends JFrame {
 		textFieldIP = new JTextField();
 
 		textFieldIP.setColumns(10);
-		textFieldIP.setBounds(152, 34, 169, 19);
+		textFieldIP.setBounds(152, 34, 86, 19);
 		panel.add(textFieldIP);
 
 		textFieldPort = new JTextField();
@@ -83,7 +84,7 @@ public class ProcTokenRingFrame extends JFrame {
 		lblMessage = new JLabel("Message : ");
 		lblMessage.setForeground(Color.RED);
 		lblMessage.setFont(new Font("Tahoma", Font.BOLD, 10));
-		lblMessage.setBounds(10, 208, 404, 16);
+		lblMessage.setBounds(4, 111, 367, 16);
 		panel.add(lblMessage);
 
 		textFieldID = new JTextField();
@@ -113,7 +114,7 @@ public class ProcTokenRingFrame extends JFrame {
 		chckbxJeVeuxLe.addActionListener(controller);
 		chckbxJeVeuxLe.setActionCommand("JeVeuxToken");
 
-		chckbxJeVeuxLe.setBounds(276, 0, 138, 23);
+		chckbxJeVeuxLe.setBounds(290, 30, 115, 23);
 		panel.add(chckbxJeVeuxLe);
 
 		lblJaiToken = new JLabel("J'ai Token :");
@@ -129,16 +130,11 @@ public class ProcTokenRingFrame extends JFrame {
 		labelJAiLeToken.setBounds(231, 87, 35, 20);
 		panel.add(labelJAiLeToken);
 		
-		textArea = new JTextArea();
-		textArea.setBounds(10, 119, 345, 85);
-		panel.add(textArea);
-		
-		btnPrint = new JButton("Imprimer");
-		btnPrint.addActionListener(controller);
-		btnPrint.setBounds(365, 136, 91, 49);
-		panel.add(btnPrint);
-		
-		disablePrint();
+		labelAttente = new JLabel("Attente : ");
+		labelAttente.setHorizontalAlignment(SwingConstants.RIGHT);
+		labelAttente.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		labelAttente.setBounds(258, 57, 99, 20);
+		panel.add(labelAttente);
 
 		setVisible(true);
 
@@ -146,18 +142,12 @@ public class ProcTokenRingFrame extends JFrame {
 
 
 	public void setLabelJAiLeToken(Boolean labelJAiLeToken1) {
-
-
 		if(labelJAiLeToken1){
 			labelJAiLeToken.setForeground(Color.green);
-
 		}else{
 			labelJAiLeToken.setForeground(Color.red);
-			labelJAiLeToken.setText(labelJAiLeToken1.toString());
 		}
 		labelJAiLeToken.setText(labelJAiLeToken1.toString());	
-
-
 	}
 
 
@@ -169,39 +159,24 @@ public class ProcTokenRingFrame extends JFrame {
 		textFieldID.setText(String.valueOf(mybrean.getID()));
 		textFieldIP.setText(mybrean.getIp());
 		textFieldPort.setText(String.valueOf(mybrean.getPort()));
-		
+
 	}
 	public void setMessage(String message){
 		lblMessage.setText("Message : " + message);
 	}
 
-	public String gettxtAreaMessage(){
-		return textArea.getText().toString();
+	public void setDelaiAttente(Timestamp timeCounter){
+		Date date= new Date();
+		Timestamp t = new Timestamp(date.getTime());
+		long o =   t.getTime() - timeCounter.getTime();
+		labelAttente.setText("Attente : " + String.valueOf(o));
 	}
 
 	public Boolean getIsTokenChecked() {
-		// TODO Auto-generated method stub
 		return chckbxJeVeuxLe.isSelected() ;
 	}
 
-
-	public void enablePrint() {
-		textArea.setEnabled(true);
-		btnPrint.setEnabled(true);
-		
+	public void libererToker() {
+		chckbxJeVeuxLe.setSelected(false);
 	}
-
-	public void disablePrint() {
-		textArea.setText("");
-		textArea.setEnabled(false);
-		btnPrint.setEnabled(false);
-		
-	}
-	
-	public void resetAreaText() {
-		textArea.setText("");
-		
-	}
-	
-
 }

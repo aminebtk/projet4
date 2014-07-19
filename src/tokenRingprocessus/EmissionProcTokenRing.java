@@ -1,4 +1,4 @@
-package tokenRing.processus;
+package tokenRingprocessus;
 /******************************************************
 	Cours :           LOG730
 	Session :         �t� 2010
@@ -24,21 +24,19 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import tokenRing.beans.ProcTokenRingBean;
-import Util.Cts;
+import tokenRingBeans.ProcTokenRingBean;
 
 
-public class EmissionProcRessource {
+public class EmissionProcTokenRing {
 
-	private static EmissionProcRessource instance;
 	private PrintWriter out;
 	private Socket socket;
 	//private Succursale succursale;
 
-	public EmissionProcRessource() {
+	public EmissionProcTokenRing(ProcTokenRingBean nextProcTokebRingBean) {
 		
 		try {
-			socket = new Socket( Cts.IP_RESSOURCE ,Cts.PORT_RESSOURCE);
+			socket = new Socket( nextProcTokebRingBean.getIp() ,nextProcTokebRingBean.getPort());
 		} catch (UnknownHostException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -60,29 +58,8 @@ public class EmissionProcRessource {
 		//out.flush();
 	}
 
-	public void reserverRessource(int idP){
-		String message = Cts.RESERVER_RESSOURCE + "#" + idP ;
+	public void EnvoyerMessage(String message){
 		out.println(message);  
 		out.flush();
 	}
-
-	public void libererRessource(int idP){
-		String message = Cts.LIBERER_RESSOURCE + "#" + idP ;
-		out.println(message);  
-		out.flush();
-	}
-	
-	public void printInRessource(String message){
-		String message2 = Cts.PRINT_RESSOURCE + "#" + message ;
-		out.println(message2);  
-		out.flush();
-	}
-	
-	
-	public static EmissionProcRessource getInstance(){
-		if(instance==null)
-				instance = new EmissionProcRessource();
-		return instance;
-	} 
-	
 }

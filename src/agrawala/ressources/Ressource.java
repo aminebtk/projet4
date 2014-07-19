@@ -1,7 +1,7 @@
 package agrawala.ressources;
 
-import tokenRing.ressources.InterfaceRessource;
-import tokenRing.ressources.ReceptionRessource;
+import tokenRingRessources.InterfaceRessource;
+import tokenRingRessources.ReceptionRessource;
 
 public class Ressource {
 	

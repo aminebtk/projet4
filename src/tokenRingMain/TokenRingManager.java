@@ -1,9 +1,9 @@
-package tokenRing.main;
+package tokenRingMain;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import tokenRing.processus.ProcTokenRing;
+import tokenRingprocessus.ProcTokenRing;
 
 
 
@@ -27,7 +27,6 @@ public class TokenRingManager implements ActionListener {
 				
 				ProcTokenRing p = new ProcTokenRing((listTokenRingProc.size()+1), 
 						interfaceCreator.getIP(), interfaceCreator.getPort(), null, null);
-
 				listTokenRingProc.add(p);
 
 			}else if (listTokenRingProc.size()==1) {

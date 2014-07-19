@@ -1,4 +1,4 @@
-package tokenRing.beans;
+package tokenRingBeans;
 
 
 

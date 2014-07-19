@@ -1,4 +1,4 @@
-package tokenRing.ressources;
+package tokenRingRessources;
 
 
 import java.io.BufferedReader;
@@ -11,7 +11,7 @@ import java.net.UnknownHostException;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import tokenRing.beans.ProcTokenRingBean;
+import tokenRingBeans.ProcTokenRingBean;
 import Util.Cts;
 
 

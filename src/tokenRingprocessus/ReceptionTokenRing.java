@@ -1,4 +1,4 @@
-package tokenRing.processus;
+package tokenRingprocessus;
 
 
 import java.io.BufferedReader;
@@ -9,7 +9,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.sql.Timestamp;
 
-import tokenRing.beans.ProcTokenRingBean;
+import tokenRingBeans.ProcTokenRingBean;
 import Util.Cts;
 
 
@@ -21,9 +21,10 @@ public class ReceptionTokenRing extends Thread {
 	private ProcTokenRingBean myBean;
 	private ProcTokenRing procTokenRing;
 
-	public ReceptionTokenRing(ProcTokenRingBean myBean, ProcTokenRing procTokenRing2){
+	public ReceptionTokenRing(ProcTokenRingBean myBean2,
+			ProcTokenRing procTokenRing2) {
 		this.procTokenRing = procTokenRing2;
-		this.myBean = myBean;
+		this.myBean = myBean2;
 		try {
 			socketserver = new ServerSocket(myBean.getPort());
 			System.out.println("J'ecoute : "+  myBean.toString());
@@ -32,6 +33,8 @@ public class ReceptionTokenRing extends Thread {
 			e.printStackTrace();
 		}
 	}
+
+
 	public void closePort(){
 		try {
 			socketserver.close();

@@ -1,4 +1,4 @@
-package tokenRing.ressources;
+package tokenRingRessources;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -40,7 +40,7 @@ public class InterfaceRessource extends JFrame{
 
 		lblPro = new JLabel("Disponible");
 		lblPro.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblPro.setForeground(Color.GREEN);
+		lblPro.setForeground(new Color(0, 128, 0));
 		lblPro.setBounds(10, 36, 201, 14);
 		panel.add(lblPro);
 
@@ -62,7 +62,7 @@ public class InterfaceRessource extends JFrame{
 	public void ajouterReservation(String string) {
 		Date n = new Date();
 		listModel.add(listModel.getSize(),string + " - " +  n.toString()  );
-		
+
 		lblPro.setText("utilis\u00E9e par PROCESSUS " + string);
 		lblPro.setForeground(Color.RED);
 	}
@@ -72,7 +72,7 @@ public class InterfaceRessource extends JFrame{
 	}
 
 	public void libererReservation() {
-		lblPro.setForeground(Color.GREEN);
+		lblPro.setForeground(new Color(0, 128, 0));
 		lblPro.setText("Disponible");
 	}
 }

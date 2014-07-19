@@ -1,10 +1,13 @@
-package tokenRing.processus;
+package tokenRingprocessus;
 
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.Random;
 
-import tokenRing.beans.ProcTokenRingBean;
+import tokenRingBeans.ProcTokenRingBean;
 import Util.Cts;
 
 
@@ -16,7 +19,7 @@ public class ProcTokenRing implements ActionListener {
 	private Boolean JeVeuxToken = false;
 	private Boolean JAiLeToken = false;
 	private Boolean JaiRessource = false;
-
+	private Timestamp timeCounter;
 	private ProcTokenRingBean nextProcTokebRingBean;
 	//private ProcTokenRingBean previousProcTokebRingBean;
 	private ReceptionTokenRing listnerProc;
@@ -41,7 +44,7 @@ public class ProcTokenRing implements ActionListener {
 
 		if(listnerProc!=null)
 			closePort();
-		listnerProc = new ReceptionTokenRing(myBean, this);
+		listnerProc = new ReceptionTokenRing(getMyBean(), this);
 		listnerProc.start();
 	}
 
@@ -84,28 +87,45 @@ public class ProcTokenRing implements ActionListener {
 	}
 
 	public void sendTokenToNeext() {
-		if(!jeVeuxToken()){
+		if(jeVeuxToken()){
+			setJAiLeToken(true);	
+			e = new  EmissionProcRessource();
+			e.reserverRessource(getMyBean().getID());
+			setJaiRessource(true);
+			procTokenRingFrame.setDelaiAttente(timeCounter);
+			simulerUtilisation();
+			setJAiLeToken(false);	
+			if(getJaiRessource())
+				e.libererRessource(getMyBean().getID());
+			procTokenRingFrame.libererToker();
 
+
+		}else{
+			setJAiLeToken(true);	
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			String message = String.valueOf(Cts.TOKEN)+"#"+getMyBean().getID();
-			getSenderProc().EnvoyerMessage(message);
 			setJAiLeToken(false);	
-			if(getJaiRessource())
-				e.libererRessource(getMyBean().getID());
-		
+		}
 
-				
+		String message = String.valueOf(Cts.TOKEN)+"#"+getMyBean().getID();
+		getSenderProc().EnvoyerMessage(message);		
+	}
 
-		}else{
-			e = new  EmissionProcRessource();
-			e.reserverRessource(getMyBean().getID());
+	private void simulerUtilisation() {
+		Random randomNum = new Random();
+		int min1 = 4; 
+		int max1 =8;
+		int attente = randomNum.nextInt((max1 - min1) + 1) + min1;
 
-			setJaiRessource(true);
+		try {
+			Thread.sleep(attente*1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
@@ -117,27 +137,18 @@ public class ProcTokenRing implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		if(arg0.getActionCommand().equals("JeVeuxToken")){
-			JeVeuxToken = procTokenRingFrame.getIsTokenChecked();
-			procTokenRingFrame.enablePrint();
-	
+			if(procTokenRingFrame.getIsTokenChecked()){
+				Date date= new Date();
+				timeCounter = new Timestamp(date.getTime());
+			}else{
+				timeCounter =null;
+			}
 		}
-		if(!JeVeuxToken && getJAiLeToken()){
-			sendTokenToNeext();
-			procTokenRingFrame.disablePrint();
-	
-		}
-			
-		if(arg0.getActionCommand().equals("Imprimer")){
-			
-			e.printInRessource(procTokenRingFrame.gettxtAreaMessage());
-			procTokenRingFrame.resetAreaText();
-	}
 	}
 
 	public Boolean jeVeuxToken(){
-		return JeVeuxToken;
+		return procTokenRingFrame.getIsTokenChecked();
 	}
 
 	public Boolean getJAiLeToken() {
@@ -146,7 +157,7 @@ public class ProcTokenRing implements ActionListener {
 
 	public void setJAiLeToken(Boolean jAiLeToken1) {
 		JAiLeToken = jAiLeToken1;
-		procTokenRingFrame.setLabelJAiLeToken(JAiLeToken);
+		procTokenRingFrame.setLabelJAiLeToken(jAiLeToken1);
 	}
 
 	public Boolean getJaiRessource() {
@@ -155,8 +166,6 @@ public class ProcTokenRing implements ActionListener {
 
 	public void setJaiRessource(Boolean jaiRessource) {
 		JaiRessource = jaiRessource;
-		
-
 	}
 
 }

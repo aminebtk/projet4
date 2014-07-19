@@ -64,7 +64,6 @@ public class InterfaceRessource extends JFrame{
 	public void ajouterReservation(String string) {
 		Date n = new Date();
 		listModel.add(0,string + " - " +  n.toString()  );
-
 		lblPro.setText(string);
 	}
 

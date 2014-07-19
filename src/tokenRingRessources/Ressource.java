@@ -1,4 +1,4 @@
-package tokenRing.ressources;
+package tokenRingRessources;
 
 public class Ressource {
 	

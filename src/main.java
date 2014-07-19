@@ -1,6 +1,6 @@
 import Util.Cts;
 import ressources.Ressource;
-import tokenRing.main.TokenRingManager;
+import tokenRingMain.TokenRingManager;
 
 public class main {
 

@@ -1,8 +1,8 @@
 package agrawala.main;
 import Util.Cts;
-import tokenRing.ressources.InterfaceRessource;
-import tokenRing.ressources.ReceptionRessource;
-import tokenRing.ressources.Ressource;
+import tokenRingRessources.InterfaceRessource;
+import tokenRingRessources.ReceptionRessource;
+import tokenRingRessources.Ressource;
 
 public class main {
 

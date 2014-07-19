@@ -1,4 +1,4 @@
-package tokenRing.main;
+package tokenRingMain;
 /******************************************************
 	Cours :           LOG730
 	Session :         �t� 2010
