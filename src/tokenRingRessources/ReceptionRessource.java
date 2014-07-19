@@ -7,11 +7,7 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.sql.Date;
-import java.sql.Timestamp;
 
-import tokenRingBeans.ProcTokenRingBean;
 import Util.Cts;
 
 
@@ -21,12 +17,10 @@ public class ReceptionRessource extends Thread {
 	private static Socket socket = null;
 	private ServerSocket socketserver;
 
-	private int port;
 	private InterfaceRessource interfaceR;
 
 
 	public ReceptionRessource(int port, InterfaceRessource interfaceR){
-		this.port = port;
 		this.interfaceR = interfaceR;
 		try {
 			socketserver = new ServerSocket(port);

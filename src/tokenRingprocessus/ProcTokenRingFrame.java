@@ -12,15 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-import javax.swing.AbstractAction;
-
-import java.awt.event.ActionEvent;
 import java.sql.Timestamp;
 import java.util.Date;
-
-import javax.swing.Action;
 
 import tokenRingBeans.ProcTokenRingBean;
 
@@ -48,7 +41,7 @@ public class ProcTokenRingFrame extends JFrame {
 	public ProcTokenRingFrame(ProcTokenRingBean mybrean, ActionListener controller) {
 		this.mybrean = mybrean;
 		setTitle("Processus : " + mybrean.getID());
-		setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(10, -167+ (((mybrean.getID() < 3) ? mybrean.getID() : 1 )*280), 437, 175);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

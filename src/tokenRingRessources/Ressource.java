@@ -4,7 +4,6 @@ public class Ressource {
 	
 	private int port;
 	private String ip;
-	private ReceptionRessource reception;
 	private InterfaceRessource interfaceR;
 	
 	public Ressource(String ip , int port ){
@@ -12,7 +11,7 @@ public class Ressource {
 		this.port =port;
 
 		interfaceR = new InterfaceRessource();
-		reception = new ReceptionRessource(port,interfaceR);
+		new ReceptionRessource(port,interfaceR);
 
 		
 	}

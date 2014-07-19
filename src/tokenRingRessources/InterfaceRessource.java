@@ -1,23 +1,24 @@
 package tokenRingRessources;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.util.Date;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.ListModel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
 
 public class InterfaceRessource extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	DefaultListModel<String>   listModel;
 	private JLabel lblPro;
 
