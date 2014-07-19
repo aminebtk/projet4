@@ -1,0 +1,73 @@
+
+/******************************************************
+	Cours :           LOG730
+	Session :         Été 2010
+	Groupe :          01
+	Projet :          Laboratoire #3
+	Date création :   2010-05-21
+	Etudiant(e)(s) :    Mohamed Zibouli
+						Amine Boutkhil
+						Hicham Ouchker
+	Code(s) perm. : 	ZIBM29108400
+						BOUA20088103
+						OUCH16047600
+ ******************************************************
+
+Class ayant pour reponsabilité d'ecouter le port d'echange entre les succursales.
+
+ ******************************************************/
+package mediatorProcessus;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import agrawala.beans.ProcAgrawalaBean;
+import Util.Cts;
+
+public class ReceptionIntermediaire implements Runnable {
+
+	private BufferedReader in;
+	private PrintWriter out;
+	private GestionnaireConnexionintermediaire getGestionnaireConnexion;
+	
+	public ReceptionIntermediaire(PrintWriter out, BufferedReader in, GestionnaireConnexionintermediaire gestionnaireConnexionBanque){
+		this.out = out;
+		this.in = in;
+		this.getGestionnaireConnexion = gestionnaireConnexionBanque;
+	}
+	
+	public void run() {
+		
+		String commandLine;
+		try {
+			while ((commandLine = in.readLine()) != null){
+				
+				String[] commandes = commandLine.split("#");
+				int commandeType = Integer.valueOf(commandes[0]);
+				switch (commandeType){
+				case Cts.SUSCRIBE_PROC :
+					ProcAgrawalaBean p;
+					p = new ProcAgrawalaBean(Integer.valueOf(commandes[1]), commandes[2], Integer.valueOf(commandes[3]));
+					getGestionnaireConnexion.setProcBean(p);
+					break;
+				case Cts.ADD_PROC :
+					ProcAgrawalaBean p1;
+					p = new ProcAgrawalaBean(Integer.valueOf(commandes[1]), commandes[2], Integer.valueOf(commandes[3]));
+					getGestionnaireConnexion.setProcBean(p);
+					break;
+				default:
+					System.out.println("Commande introuvable!");
+				}
+			}
+		} catch (NumberFormatException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+	}
+
+}

@@ -42,7 +42,7 @@ public class ProcAgrawalaBean {
 
 	@Override
 	public String toString() {
-		return "ProcTokenRingBean [port=" + port + ", ip=" + ip + ", ID=" + ID
+		return "ProcAgrawala [port=" + port + ", ip=" + ip + ", ID=" + ID
 				+ "]";
 	}
 

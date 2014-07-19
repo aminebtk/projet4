@@ -37,7 +37,6 @@ public class AgrawalaProcCreator extends JFrame {
 	private JTextField textFieldIP;
 	private JTextField textFieldPort;
 	private JLabel labelError;
-	private JButton btnLancerToken;
 
 	public AgrawalaProcCreator(ActionListener controller) {
 		initUI(controller);
@@ -67,7 +66,7 @@ public class AgrawalaProcCreator extends JFrame {
 		textFieldPort.setBounds(152, 75, 57, 27);
 		panel.add(textFieldPort);
 
-		JLabel lblServeurDeLa = new JLabel("Processus Token Ring");
+		JLabel lblServeurDeLa = new JLabel("Processus Agrawala");
 		lblServeurDeLa.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblServeurDeLa.setBounds(10, 44, 142, 27);
 		panel.add(lblServeurDeLa);
@@ -87,18 +86,10 @@ public class AgrawalaProcCreator extends JFrame {
 		labelError = new JLabel("");
 		labelError.setForeground(Color.RED);
 		labelError.setFont(new Font("Tahoma", Font.BOLD, 10));
-		labelError.setBounds(10, 184, 365, 16);
+		labelError.setBounds(10, 144, 365, 16);
 		panel.add(labelError);
-		
-		btnLancerToken = new JButton("Lancer Token");
-		btnLancerToken.addActionListener(controller);
-		btnLancerToken.setActionCommand("lancerToken");
-		btnLancerToken.setFont(new Font("Tahoma", Font.BOLD, 10));
-		btnLancerToken.setBounds(150, 146, 134, 27);
-		btnLancerToken.setEnabled(false);
-		panel.add(btnLancerToken);
 		setTitle("Créer Processus");
-		setSize(401, 238);
+		setSize(401, 190);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
@@ -134,10 +125,6 @@ public class AgrawalaProcCreator extends JFrame {
 		textFieldPort.setText(String.valueOf(i));
 	}
 
-	public JButton getBtnLancerToken( ) {
-		return this.btnLancerToken ;
-	}
-	
 
 }
 
