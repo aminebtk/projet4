@@ -42,8 +42,7 @@ public class ProcAgrawalaBean {
 
 	@Override
 	public String toString() {
-		return "ProcAgrawala [port=" + port + ", ip=" + ip + ", ID=" + ID
-				+ "]";
+		return "Proc ID=" + ID + " Port" + port + "]";
 	}
 
 	

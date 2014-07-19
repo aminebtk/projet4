@@ -20,10 +20,10 @@ public class ProcAgrawala implements ActionListener {
 
 	public ProcAgrawala(int id, String AdresseIp, int Port){
 		setMyBean(new ProcAgrawalaBean(id, AdresseIp, Port));
-		connexionMediator = new ConnexionMediator(Cts.INTERMEDIAIRE_IP, Cts.INTERMEDIAIRE_PORT , getMyBean(), this);
-		procTokenRingFrame = new ProcAgrawalaFrame(getMyBean(), this);
-		procTokenRingFrame.update();
 		listProc = new ArrayList<ProcAgrawalaBean>();
+		procTokenRingFrame = new ProcAgrawalaFrame(getMyBean(), this);
+		connexionMediator = new ConnexionMediator(Cts.INTERMEDIAIRE_IP, Cts.INTERMEDIAIRE_PORT , getMyBean(), this);
+		procTokenRingFrame.update();
 	}
 
 	public ProcAgrawala() {
