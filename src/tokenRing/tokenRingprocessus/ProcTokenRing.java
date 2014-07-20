@@ -1,4 +1,4 @@
-package tokenRingprocessus;
+package tokenRing.tokenRingprocessus;
 
 
 import java.awt.event.ActionEvent;
@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Random;
 
-import tokenRingBeans.ProcTokenRingBean;
+import tokenRing.tokenRingBeans.ProcTokenRingBean;
 import Util.Cts;
 
 

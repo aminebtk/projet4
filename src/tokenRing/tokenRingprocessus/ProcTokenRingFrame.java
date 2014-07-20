@@ -1,4 +1,4 @@
-package tokenRingprocessus;
+package tokenRing.tokenRingprocessus;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,10 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
 import java.sql.Timestamp;
 import java.util.Date;
 
-import tokenRingBeans.ProcTokenRingBean;
+import tokenRing.tokenRingBeans.ProcTokenRingBean;
 
 public class ProcTokenRingFrame extends JFrame {
 

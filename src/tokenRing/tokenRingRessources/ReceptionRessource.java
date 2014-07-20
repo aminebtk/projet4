@@ -1,4 +1,4 @@
-package tokenRingprocessus;
+package tokenRing.tokenRingRessources;
 
 
 import java.io.BufferedReader;
@@ -7,48 +7,38 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
-import java.sql.Timestamp;
 
-import tokenRingBeans.ProcTokenRingBean;
 import Util.Cts;
 
 
-public class ReceptionTokenRing extends Thread {
+public class ReceptionRessource extends Thread {
 
 	private BufferedReader in;
 	private static Socket socket = null;
 	private ServerSocket socketserver;
-	private ProcTokenRingBean myBean;
-	private ProcTokenRing procTokenRing;
 
-	public ReceptionTokenRing(ProcTokenRingBean myBean2,
-			ProcTokenRing procTokenRing2) {
-		this.procTokenRing = procTokenRing2;
-		this.myBean = myBean2;
+	private InterfaceRessource interfaceR;
+
+
+	public ReceptionRessource(int port, InterfaceRessource interfaceR){
+		this.interfaceR = interfaceR;
 		try {
-			socketserver = new ServerSocket(myBean.getPort());
-			System.out.println("J'ecoute : "+  myBean.toString());
+			socketserver = new ServerSocket(port);
+			listen();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-
-	public void closePort(){
-		try {
-			socketserver.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		listen();
+		
 	}
 
 	private void listen(){
 
 		try {
+			System.out.println("listen ressource:" );
 			socket = socketserver.accept();
-			System.out.println("Process connect� : " + myBean.getID());
+			System.out.println("Connect�e" );
 		} catch (SocketException e1) {
 			System.out.println("Socket close");
 		} catch (IOException e1) {
@@ -57,28 +47,38 @@ public class ReceptionTokenRing extends Thread {
 		}
 		try {
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			run();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
+
 	public void run() {
-		listen();
+
 		String commandLine;
 		try {
 			while ((commandLine = in.readLine()) != null){
+				System.out.println("Demande recue");
 				String[] commandes = commandLine.split("#");
 				int commandeType = Integer.valueOf(commandes[0]);
 				switch (commandeType){
-				case Cts.TOKEN :
-					System.out.println("Proc () " + myBean.getID() + " - Token recu de la part du : " + commandes[1]);
-					java.util.Date date= new java.util.Date();
-					procTokenRing.getInterface().setMessage("Token recu de la part du : " + commandes[1] + " | " + new Timestamp(date.getTime())  );
-					procTokenRing.setJAiLeToken(true);
-					procTokenRing.sendTokenToNeext();
+				case Cts.LIBERER_RESSOURCE :
+					System.out.println("la ressource est liberee par  " + commandes[1]);
+					interfaceR.libererReservation();
+					socket.close();
+					listen();
 					break;
-				default:
+				case Cts.RESERVER_RESSOURCE :
+					System.out.println("la ressource est reservee par  " + commandes[1]);
+					interfaceR.ajouterReservation(commandes[1]);
+
+					break;
+				case Cts.PRINT_RESSOURCE :
+					interfaceR.printMessage(commandes[1]);
+					break;
+					default:
 					System.out.println("Commande introuvable!");
 				}
 			}

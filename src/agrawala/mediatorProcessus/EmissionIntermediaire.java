@@ -16,7 +16,7 @@
 class du serveur intermediare reponsable d'envoi de message a la succursale connectée
 
  ******************************************************/
-package mediatorProcessus;
+package agrawala.mediatorProcessus;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;

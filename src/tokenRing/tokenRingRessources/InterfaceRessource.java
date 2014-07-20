@@ -1,4 +1,4 @@
-package tokenRingRessources;
+package tokenRing.tokenRingRessources;
 
 import java.awt.Color;
 import java.awt.Font;

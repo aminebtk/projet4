@@ -16,7 +16,7 @@
 Class ayant pour reponsabilité d'ecouter le port d'echange entre les succursales.
 
  ******************************************************/
-package mediatorProcessus;
+package agrawala.mediatorProcessus;
 
 import java.io.BufferedReader;
 import java.io.IOException;

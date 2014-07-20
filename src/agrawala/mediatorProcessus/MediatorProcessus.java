@@ -16,7 +16,7 @@
 Class qui creer les thread pour chaque succursale qui demande une connextion.
 
  ******************************************************/
-package mediatorProcessus;
+package agrawala.mediatorProcessus;
 
 import java.io.*;
 import java.net.*;

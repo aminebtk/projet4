@@ -17,7 +17,7 @@ Class principale d'intermediaire qui cree
 les deux objects PrintWriter et BufferedReader pour la succursale connectée
 
  ******************************************************/
-package mediatorProcessus;
+package agrawala.mediatorProcessus;
 
 import java.io.BufferedReader;
 import java.io.IOException;
