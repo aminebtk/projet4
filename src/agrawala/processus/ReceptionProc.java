@@ -31,7 +31,9 @@ public class ReceptionProc implements Runnable {
 								,Integer.valueOf(commandes[3]));
 						System.out.println("Add recu " + p.toString());
 						connexionMediator.addProc(p);
-
+						break;
+					case Cts.WANT :
+							System.out.println("WANT recu:" + commandLine);
 						break;
 					default:
 						System.out.println("Commande introuvable!");

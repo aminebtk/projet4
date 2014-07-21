@@ -51,10 +51,12 @@ public class ReceptionIntermediaire implements Runnable {
 					p = new ProcAgrawalaBean(Integer.valueOf(commandes[1]), commandes[2], Integer.valueOf(commandes[3]));
 					getGestionnaireConnexion.setProcBean(p);
 					break;
-				case Cts.ADD_PROC :
-					ProcAgrawalaBean p1;
-					p = new ProcAgrawalaBean(Integer.valueOf(commandes[1]), commandes[2], Integer.valueOf(commandes[3]));
-					getGestionnaireConnexion.setProcBean(p);
+				case Cts.WANT :
+					for(GestionnaireConnexionintermediaire g : getGestionnaireConnexion.getMediatorProcessus().getGestionnaireConnexionBanqueList() ){
+						if(Integer.valueOf(commandes[1])==g.getProcBean().getID()){
+							g.envoyerMessage(commandLine);
+						}
+					}
 					break;
 				default:
 					System.out.println("Commande introuvable!");

@@ -13,7 +13,6 @@ public class ProcAgrawalaBean {
 		this.ID = id;
 		this.ip = AdresseIp;
 		this.port = Port;
-		
 	}
 
 	public int getPort() {

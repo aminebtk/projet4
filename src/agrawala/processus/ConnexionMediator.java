@@ -6,9 +6,13 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Random;
 
+import org.omg.CORBA.Request;
+
 import agrawala.beans.ProcAgrawalaBean;
+import agrawala.beans.RequestRessource;
 import Util.Cts;
 
 
@@ -63,15 +67,23 @@ public class ConnexionMediator implements Runnable {
 	}
 
 	public void EnvoyerMessage(String message){
+		System.out.println("envoyermessage:" + message);
 		emission.EnvoyerMessage(message);
 	}
 
 	public void envoyerDemandeRes() {
 
-		//String message = Cts.RESERVER_RESSOURCE + "#" +
-
-
-		// TODO Auto-generated method stub
+	if(!procAgrawala.getStatut().equals(Cts.AGRA_WANTED)) {// ne peut demander deux fois la ressource
+		ArrayList<ProcAgrawalaBean> listProc1 = new ArrayList<ProcAgrawalaBean>();
+		listProc1 = procAgrawala.getListProc();
+		RequestRessource rr = new RequestRessource();
+		rr =  procAgrawala.createRequest(); 
+		for(ProcAgrawalaBean p : listProc1){
+			String message  = Cts.WANT + "#" + p.getID() +
+					"#" + rr.getID() + "#" + rr.gettime();
+			EnvoyerMessage(message);
+		}
+	}
 
 	}
 

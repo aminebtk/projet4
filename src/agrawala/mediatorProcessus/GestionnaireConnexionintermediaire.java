@@ -45,10 +45,10 @@ public class GestionnaireConnexionintermediaire {
 	}
 
 
-	public GestionnaireConnexionintermediaire(Socket s, MediatorProcessus connexionEcouteur){
+	public GestionnaireConnexionintermediaire(Socket s, MediatorProcessus mediatorProcessus){
 
 		this.socket = s;
-		this.connexionEcouteur = connexionEcouteur;
+		this.connexionEcouteur = mediatorProcessus;
 		try {
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream());
@@ -64,7 +64,7 @@ public class GestionnaireConnexionintermediaire {
 
 	}
 
-	public MediatorProcessus getConnexionEcouteur() {
+	public MediatorProcessus getMediatorProcessus() {
 		return connexionEcouteur;
 	}
 
