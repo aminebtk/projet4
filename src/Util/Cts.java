@@ -11,6 +11,7 @@ public class Cts {
 	public static final int ADD_PROC = 6;
 	public static final int WANT = 7;
 	public static final int REPLY = 8;
+	public static final int REMOVE_PROC = 9;
 	
 	public static final String HELD = "HELD";
 	public static final String REALESE = "REALESE";
@@ -18,12 +19,13 @@ public class Cts {
 	public static final String AGRA_WANTED = "WANTED";
 	public static final String AGRA_HELD = "HELD";
 	public static final String AGRA_RELEASED = "RELEASED";
-	
+
 	
 	public static final String IP_RESSOURCE = "127.0.0.1";
 	public static final int PORT_RESSOURCE = 8999;
 	public static final int INTERMEDIAIRE_PORT = 8998;
 	public static final String INTERMEDIAIRE_IP = "127.0.0.1";
+
 
 
 

@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import agrawala.beans.ProcAgrawalaBean;
 import agrawala.beans.RequestRessource;
+import agrawala.mediatorProcessus.GestionnaireConnexionintermediaire;
 import Util.Cts;
 
 
@@ -64,6 +65,18 @@ public class ReceptionProc implements Runnable {
 						}
 					
 						System.out.println("REPLY RECU " +commandes[1]+"|"+commandes[2]+"|"+commandes[3]);
+						break;
+						
+					case Cts.REMOVE_PROC :
+						System.out.println("REMOVE_PROC s" + commandes[1]);
+						for(ProcAgrawalaBean g : connexionMediator.getProcAgrawala().getListProc()){
+							if(Integer.valueOf(commandes[1])==g.getID()){
+								connexionMediator.getProcAgrawala().getListProc().remove(g);
+
+								break;
+							}
+						}
+						connexionMediator.getProcAgrawala().updateListProc();
 						break;
 					default:
 						System.out.println("Commande introuvable!" + commandes);

@@ -3,14 +3,17 @@ package agrawala.processus;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import sun.awt.WindowClosingListener;
 import Util.Cts;
 import agrawala.beans.ProcAgrawalaBean;
 import agrawala.beans.RequestRessource;
 
-public class ProcAgrawala implements ActionListener {
+public class ProcAgrawala implements ActionListener, WindowListener {
 
 	private ProcAgrawalaBean myBean;
 	private RequestRessource requestRessource;
@@ -85,10 +88,13 @@ public class ProcAgrawala implements ActionListener {
 
 		if(!found){
 			listProc.add(p);
-			procTokenRingFrame.updateListProc(listProc);
+			updateListProc();
 		}
 	}
 
+	public void updateListProc(){
+		procTokenRingFrame.updateListProc(listProc);
+	}
 	public String getStatut() {
 		return statut;
 	}
@@ -121,7 +127,50 @@ public class ProcAgrawala implements ActionListener {
 		}
 		
 		listRequest.clear();
-		connexionMediator.getProcAgrawala().setStatut(Cts.AGRA_RELEASED);
+		setStatut(Cts.AGRA_RELEASED);
+	}
+
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		System.out.println("windowActivated");
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		String message  = Cts.REMOVE_PROC + "#" +((ProcAgrawalaFrame) e.getSource()).getIdProc();
+		connexionMediator.EnvoyerMessage(message);
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

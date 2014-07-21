@@ -4,12 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -53,7 +55,7 @@ public class ProcAgrawalaFrame extends JFrame {
 	public ProcAgrawalaFrame(ProcAgrawalaBean mybrean, ActionListener controller) {
 		this.mybrean = mybrean;
 		setTitle("Processus : " + mybrean.getID());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(10, -167+ (((mybrean.getID() < 5) ? mybrean.getID() : 1 )*177), 388, 240);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -113,7 +115,7 @@ public class ProcAgrawalaFrame extends JFrame {
 		ButtonGroup group = new ButtonGroup();
 
 		listModel = new DefaultListModel<String> ();
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(184, 66, 173, 99);
 		panel.add(scrollPane);
@@ -131,13 +133,14 @@ public class ProcAgrawalaFrame extends JFrame {
 		labelStatus.setFont(new Font("Tahoma", Font.BOLD, 12));
 		labelStatus.setBounds(24, 102, 117, 20);
 		panel.add(labelStatus);
-		
+
 		JButton btnNewButton = new JButton("Demander ressource");
 		btnNewButton.addActionListener(controller);
 		btnNewButton.setActionCommand("demander");
 		btnNewButton.setBounds(183, 9, 169, 28);
 		panel.add(btnNewButton);
 
+		addWindowListener((WindowListener) controller);
 
 		setVisible(true);
 
@@ -158,15 +161,17 @@ public class ProcAgrawalaFrame extends JFrame {
 
 
 	public void updateListProc(ArrayList<ProcAgrawalaBean> listProc) {
-			listModel.removeAllElements();
-			for(ProcAgrawalaBean p : listProc){
-				listModel.addElement(p.toString());
-			}
-			setMessage("");
+		listModel.removeAllElements();
+		for(ProcAgrawalaBean p : listProc){
+			listModel.addElement(p.toString());
+		}
+		setMessage("");
 	}
 
 
-
+	public int getIdProc(){
+		return Integer.valueOf(textFieldID.getText());
+	}
 	public void setStatut(String s) {
 		labelStatus.setText(s); 
 		if(s.equals(Cts.AGRA_HELD))

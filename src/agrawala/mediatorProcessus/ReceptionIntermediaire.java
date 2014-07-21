@@ -21,6 +21,7 @@ package agrawala.mediatorProcessus;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import agrawala.beans.ProcAgrawalaBean;
 import Util.Cts;
@@ -62,6 +63,19 @@ public class ReceptionIntermediaire implements Runnable {
 					for(GestionnaireConnexionintermediaire g : getGestionnaireConnexion.getMediatorProcessus().getGestionnaireConnexionBanqueList() ){
 						if(Integer.valueOf(commandes[2])==g.getProcBean().getID()){
 							g.envoyerMessage(commandLine);
+						}
+					}
+					break;
+				case Cts.REMOVE_PROC :
+					System.out.println("REMOVE_PROC " + commandes[1]);
+					ArrayList<GestionnaireConnexionintermediaire> t = getGestionnaireConnexion.getMediatorProcessus().getGestionnaireConnexionBanqueList();
+					
+					for(GestionnaireConnexionintermediaire g : t ){
+						if(Integer.valueOf(commandes[1])!=g.getProcBean().getID()){
+							g.envoyerMessage(commandLine);
+						}else{
+							getGestionnaireConnexion.getMediatorProcessus().getGestionnaireConnexionBanqueList().remove(g);
+							break;
 						}
 					}
 					break;
