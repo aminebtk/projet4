@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import Util.Cts;
 import agrawala.beans.ProcAgrawalaBean;
 
 import javax.swing.JTextArea;
@@ -44,6 +45,7 @@ public class ProcAgrawalaFrame extends JFrame {
 	private ProcAgrawalaBean mybrean;
 	private JLabel lblMessage;
 	private DefaultListModel<String> listModel;
+	private JLabel labelStatus;
 
 	/**
 	 * Create the frame.
@@ -125,7 +127,7 @@ public class ProcAgrawalaFrame extends JFrame {
 		lblListOfProcessus.setBounds(184, 45, 145, 19);
 		panel.add(lblListOfProcessus);
 
-		JLabel labelStatus = new JLabel("");
+		labelStatus = new JLabel("");
 		labelStatus.setFont(new Font("Tahoma", Font.BOLD, 12));
 		labelStatus.setBounds(24, 102, 117, 20);
 		panel.add(labelStatus);
@@ -161,6 +163,18 @@ public class ProcAgrawalaFrame extends JFrame {
 				listModel.addElement(p.toString());
 			}
 			setMessage("");
+	}
+
+
+
+	public void setStatut(String s) {
+		labelStatus.setText(s); 
+		if(s.equals(Cts.AGRA_HELD))
+			labelStatus.setForeground(Color.GRAY);
+		if(s.equals(Cts.AGRA_RELEASED))
+			labelStatus.setForeground(Color.BLUE);
+		if(s.equals(Cts.AGRA_WANTED))
+			labelStatus.setForeground(Color.RED);
 	}
 
 }

@@ -58,6 +58,13 @@ public class ReceptionIntermediaire implements Runnable {
 						}
 					}
 					break;
+				case Cts.REPLY :
+					for(GestionnaireConnexionintermediaire g : getGestionnaireConnexion.getMediatorProcessus().getGestionnaireConnexionBanqueList() ){
+						if(Integer.valueOf(commandes[2])==g.getProcBean().getID()){
+							g.envoyerMessage(commandLine);
+						}
+					}
+					break;
 				default:
 					System.out.println("Commande introuvable!");
 				}

@@ -67,24 +67,26 @@ public class ConnexionMediator implements Runnable {
 	}
 
 	public void EnvoyerMessage(String message){
-		System.out.println("envoyermessage:" + message);
 		emission.EnvoyerMessage(message);
 	}
 
 	public void envoyerDemandeRes() {
 
-	if(!procAgrawala.getStatut().equals(Cts.AGRA_WANTED)) {// ne peut demander deux fois la ressource
-		ArrayList<ProcAgrawalaBean> listProc1 = new ArrayList<ProcAgrawalaBean>();
-		listProc1 = procAgrawala.getListProc();
-		RequestRessource rr = new RequestRessource();
-		rr =  procAgrawala.createRequest(); 
-		for(ProcAgrawalaBean p : listProc1){
-			String message  = Cts.WANT + "#" + p.getID() +
-					"#" + rr.getID() + "#" + rr.gettime();
-			EnvoyerMessage(message);
-		}
-	}
+		if(!procAgrawala.getStatut().equals(Cts.AGRA_WANTED)) {// ne peut demander deux fois la ressource
+			if( !procAgrawala.getStatut().equals(Cts.AGRA_HELD) ){
+				ArrayList<ProcAgrawalaBean> listProc1 = new ArrayList<ProcAgrawalaBean>();
+				listProc1 = procAgrawala.getListProc();
+				RequestRessource rr = new RequestRessource();
+				rr =  procAgrawala.createRequest(); 
+				for(ProcAgrawalaBean p : listProc1){
+					String message  = Cts.WANT + "#" + p.getID() +
+							"#" + rr.getID_from() + "#" + rr.gettime();
+					EnvoyerMessage(message);
+				}
+				procAgrawala.setStatut(Cts.AGRA_WANTED);
+			}
 
+		}
 	}
 
 	public void setMyBean(ProcAgrawalaBean p) {
@@ -92,10 +94,17 @@ public class ConnexionMediator implements Runnable {
 
 	}
 
+	public String getStatut(){
+		return procAgrawala.getStatut();
+	}
+
 	public void addProc(ProcAgrawalaBean p) {
 		procAgrawala.addProc(p);
 	}
 
+	public ProcAgrawala getProcAgrawala(){
+		return procAgrawala;
+	}
 
 	/*	private int getRandomDelay(){
 		Random r = new Random();

@@ -14,6 +14,7 @@ public class ProcAgrawala implements ActionListener {
 
 	private ProcAgrawalaBean myBean;
 	private RequestRessource requestRessource;
+	private ArrayList<RequestRessource> listRequest;
 	private String statut = "";
 	private Boolean JAiLeToken = false;
 	private Boolean JaiRessource = false;
@@ -26,8 +27,10 @@ public class ProcAgrawala implements ActionListener {
 	private ConnexionMediator connexionMediator;
 
 	public ProcAgrawala(int id, String AdresseIp, int Port){
+		requestRessource = new RequestRessource(id,Long.MAX_VALUE);
 		setMyBean(new ProcAgrawalaBean(id, AdresseIp, Port));
 		listProc = new ArrayList<ProcAgrawalaBean>();
+		listRequest = new ArrayList<RequestRessource>();
 		procTokenRingFrame = new ProcAgrawalaFrame(getMyBean(), this);
 		connexionMediator = new ConnexionMediator(Cts.INTERMEDIAIRE_IP, Cts.INTERMEDIAIRE_PORT , getMyBean(), this);
 		procTokenRingFrame.update();
@@ -91,6 +94,7 @@ public class ProcAgrawala implements ActionListener {
 	}
 	public void setStatut(String st) {
 		statut = st;
+		procTokenRingFrame.setStatut(st);
 	}
 
 	public RequestRessource getRequest() {
@@ -101,6 +105,23 @@ public class ProcAgrawala implements ActionListener {
 		Calendar lCDateTime = Calendar.getInstance();
 		requestRessource =  new RequestRessource(getMyBean().getID(), lCDateTime.getTimeInMillis());
 		return requestRessource;
+	}
+
+	public void addRequest(RequestRessource r) {
+		listRequest.add(r);
+	}
+
+	public void replayToAllProc() {
+		requestRessource = new RequestRessource(getMyBean().getID(),Long.MAX_VALUE);
+		
+		for(RequestRessource r : listRequest){
+			String message  = Cts.REPLY + "#" +r.getID_to() +
+					"#" +r.getID_from() + "#" +r.gettime();
+			connexionMediator.EnvoyerMessage(message);
+		}
+		
+		listRequest.clear();
+		connexionMediator.getProcAgrawala().setStatut(Cts.AGRA_RELEASED);
 	}
 	
 }
