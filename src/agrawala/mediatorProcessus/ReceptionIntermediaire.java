@@ -69,15 +69,15 @@ public class ReceptionIntermediaire implements Runnable {
 				case Cts.REMOVE_PROC :
 					System.out.println("REMOVE_PROC " + commandes[1]);
 					ArrayList<GestionnaireConnexionintermediaire> t = getGestionnaireConnexion.getMediatorProcessus().getGestionnaireConnexionBanqueList();
-					
+					GestionnaireConnexionintermediaire toBedeleted = null;
 					for(GestionnaireConnexionintermediaire g : t ){
 						if(Integer.valueOf(commandes[1])!=g.getProcBean().getID()){
 							g.envoyerMessage(commandLine);
 						}else{
-							getGestionnaireConnexion.getMediatorProcessus().getGestionnaireConnexionBanqueList().remove(g);
-							break;
+							toBedeleted = g;
 						}
 					}
+					getGestionnaireConnexion.getMediatorProcessus().getGestionnaireConnexionBanqueList().remove(toBedeleted);
 					break;
 				default:
 					System.out.println("Commande introuvable!");

@@ -53,26 +53,18 @@ public class ReceptionProc implements Runnable {
 						if(connexionMediator.getProcAgrawala().getListProc().size()==replyCount){
 							System.out.println("je rentre dans");
 							connexionMediator.getProcAgrawala().setStatut(Cts.AGRA_HELD);
-							try {
-								Thread.sleep(5000);
-							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							connexionMediator.getProcAgrawala().replayToAllProc();
-							System.out.println("je sors");
+							EmissionProcRessource t = new EmissionProcRessource(connexionMediator);//connexionMediator.getProcAgrawala().getMyBean());
+							t.start();
 							replyCount=0;
 						}
 					
 						System.out.println("REPLY RECU " +commandes[1]+"|"+commandes[2]+"|"+commandes[3]);
 						break;
-						
 					case Cts.REMOVE_PROC :
 						System.out.println("REMOVE_PROC s" + commandes[1]);
 						for(ProcAgrawalaBean g : connexionMediator.getProcAgrawala().getListProc()){
 							if(Integer.valueOf(commandes[1])==g.getID()){
 								connexionMediator.getProcAgrawala().getListProc().remove(g);
-
 								break;
 							}
 						}

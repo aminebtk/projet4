@@ -11,7 +11,7 @@ public class main {
 		Thread t = new Thread(new MediatorProcessus());
 		t.start();
 		new AgrawalaProcManager();	
-		//new Ressource(Cts.IP_RESSOURCE , Cts.PORT_RESSOURCE );
+		new Ressource(Cts.IP_RESSOURCE , Cts.PORT_RESSOURCE );
 
 	}
 

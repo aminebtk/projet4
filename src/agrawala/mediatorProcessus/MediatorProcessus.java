@@ -86,8 +86,10 @@ public class MediatorProcessus implements Runnable{
 	}
 
 	public void informerLesAutresProc() {
-		for (GestionnaireConnexionintermediaire g : gestConProcList){
-			for (GestionnaireConnexionintermediaire g1 : gestConProcList){
+		
+		ArrayList<GestionnaireConnexionintermediaire> gestConProcListTmp = gestConProcList;
+		for (GestionnaireConnexionintermediaire g : gestConProcListTmp){
+			for (GestionnaireConnexionintermediaire g1 : gestConProcListTmp){
 				if(g.getProcBean().getID()!=g1.getProcBean().getID()){
 					System.out.println("je suis " + g.getProcBean().getID() + " Send to " + g1.getProcBean().getID());
 					String message = Cts.SUSCRIBE_PROC +"#"+g.getProcBean().getID() + 
