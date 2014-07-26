@@ -33,7 +33,7 @@ public class ProcTokenRing implements ActionListener {
 		procTokenRingFrame.update();
 		setNextProcTokebRing(n);
 		//setPreviousProcTokebRing(p);
-		System.out.println(getMyBean().toString());
+		//System.out.println(getMyBean().toString());
 	}
 
 	public ProcTokenRing() {

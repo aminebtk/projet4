@@ -82,7 +82,7 @@ public class ProcAgrawala implements ActionListener, WindowListener {
 	}
 
 	public void addProc(ProcAgrawalaBean p) {
-		System.out.println("i m " + getMyBean().getID() + " adding " +  p.getID());
+		//System.out.println("i m " + getMyBean().getID() + " adding " +  p.getID());
 		Boolean found = false;
 		for(ProcAgrawalaBean p1 : listProc){
 			if(p1.getID()==p.getID()){
@@ -138,7 +138,7 @@ public class ProcAgrawala implements ActionListener, WindowListener {
 
 	@Override
 	public void windowActivated(WindowEvent e) {
-		System.out.println("windowActivated");
+		//System.out.println("windowActivated");
 		
 	}
 

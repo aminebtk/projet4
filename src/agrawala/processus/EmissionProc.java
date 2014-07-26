@@ -20,7 +20,7 @@ public class EmissionProc implements Runnable {
 		String message = Cts.SUSCRIBE_PROC + "#" + procAgrawalaBean.getID() + 
 				"#" + procAgrawalaBean.getIp() + 
 				"#" + procAgrawalaBean.getPort() ;
-		System.out.println(message);
+		//System.out.println(message);
 		out.println(message);  
 		out.flush();
 	}

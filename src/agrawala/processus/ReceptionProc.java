@@ -33,7 +33,7 @@ public class ReceptionProc implements Runnable {
 						ProcAgrawalaBean p = new ProcAgrawalaBean(Integer.valueOf(commandes[1])
 								,(commandes[2])
 								,Integer.valueOf(commandes[3]));
-						System.out.println("Add recu " + p.toString());
+						//System.out.println("Add recu " + p.toString());
 						connexionMediator.addProc(p);
 						break;
 					case Cts.WANT :
@@ -60,10 +60,10 @@ public class ReceptionProc implements Runnable {
 							replyCount=0;
 						}
 					
-						System.out.println("REPLY RECU " +commandes[1]+"|"+commandes[2]+"|"+commandes[3]);
+						//System.out.println("REPLY RECU " +commandes[1]+"|"+commandes[2]+"|"+commandes[3]);
 						break;
 					case Cts.REMOVE_PROC :
-						System.out.println("REMOVE_PROC s" + commandes[1]);
+						//System.out.println("REMOVE_PROC s" + commandes[1]);
 						for(ProcAgrawalaBean g : connexionMediator.getProcAgrawala().getListProc()){
 							if(Integer.valueOf(commandes[1])==g.getID()){
 								connexionMediator.getProcAgrawala().getListProc().remove(g);
@@ -73,16 +73,16 @@ public class ReceptionProc implements Runnable {
 						connexionMediator.getProcAgrawala().updateListProc();
 						break;
 					default:
-						System.out.println("Commande introuvable!" + commandes);
+						//System.out.println("Commande introuvable!" + commandes);
 					}
 				}
 
 			}
 		} catch (NumberFormatException e) {
-			System.out.println("Erreur NumberFormatException");
+			//System.out.println("Erreur NumberFormatException");
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.out.println("Erreur IOException 2");
+			//System.out.println("Erreur IOException 2");
 			e.printStackTrace();
 		}
 

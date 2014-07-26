@@ -201,5 +201,6 @@ public class ProcAgrawalaFrame extends JFrame {
 		Timestamp t = new Timestamp(date.getTime());
 		long o =   t.getTime() - timeCounter.getTime();
 		lblDelai.setText("Attente : " + String.valueOf(o));
+		System.out.println("Agrawala Delai;" + mybrean.getID() + ";" + String.valueOf(o) );
 	}
 }

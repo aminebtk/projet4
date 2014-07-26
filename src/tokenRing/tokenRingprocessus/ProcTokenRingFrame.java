@@ -164,6 +164,7 @@ public class ProcTokenRingFrame extends JFrame {
 		Timestamp t = new Timestamp(date.getTime());
 		long o =   t.getTime() - timeCounter.getTime();
 		labelAttente.setText("Attente : " + String.valueOf(o));
+		System.out.println("Token Ring Delai;" + mybrean.getID() + ";" + String.valueOf(o) );
 	}
 
 	public Boolean getIsTokenChecked() {

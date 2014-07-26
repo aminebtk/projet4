@@ -36,11 +36,11 @@ public class ReceptionRessource extends Thread {
 	private void listen(){
 
 		try {
-			System.out.println("listen ressource:" );
+			//System.out.println("listen ressource:" );
 			socket = socketserver.accept();
-			System.out.println("Connect�e" );
+			//System.out.println("Connect�e" );
 		} catch (SocketException e1) {
-			System.out.println("Socket close");
+			//System.out.println("Socket close");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -60,18 +60,18 @@ public class ReceptionRessource extends Thread {
 		String commandLine;
 		try {
 			while ((commandLine = in.readLine()) != null){
-				System.out.println("Demande recue");
+				//System.out.println("Demande recue");
 				String[] commandes = commandLine.split("#");
 				int commandeType = Integer.valueOf(commandes[0]);
 				switch (commandeType){
 				case Cts.LIBERER_RESSOURCE :
-					System.out.println("la ressource est liberee par  " + commandes[1]);
+					//System.out.println("la ressource est liberee par  " + commandes[1]);
 					interfaceR.libererReservation();
 					socket.close();
 					listen();
 					break;
 				case Cts.RESERVER_RESSOURCE :
-					System.out.println("la ressource est reservee par  " + commandes[1]);
+					//System.out.println("la ressource est reservee par  " + commandes[1]);
 					interfaceR.ajouterReservation(commandes[1]);
 
 					break;
@@ -79,14 +79,14 @@ public class ReceptionRessource extends Thread {
 					interfaceR.printMessage(commandes[1]);
 					break;
 					default:
-					System.out.println("Commande introuvable!");
+					//System.out.println("Commande introuvable!");
 				}
 			}
 		} catch (NumberFormatException e) {
-			System.out.println("Erreur NumberFormatException");
+			//System.out.println("Erreur NumberFormatException");
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.out.println("Erreur IOException 2");
+			//System.out.println("Erreur IOException 2");
 			e.printStackTrace();
 		}
 

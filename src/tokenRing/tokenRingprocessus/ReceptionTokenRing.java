@@ -27,7 +27,7 @@ public class ReceptionTokenRing extends Thread {
 		this.myBean = myBean2;
 		try {
 			socketserver = new ServerSocket(myBean.getPort());
-			System.out.println("J'ecoute : "+  myBean.toString());
+			//System.out.println("J'ecoute : "+  myBean.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,9 +48,9 @@ public class ReceptionTokenRing extends Thread {
 
 		try {
 			socket = socketserver.accept();
-			System.out.println("Process connect� : " + myBean.getID());
+			//System.out.println("Process connect� : " + myBean.getID());
 		} catch (SocketException e1) {
-			System.out.println("Socket close");
+			//System.out.println("Socket close");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -72,21 +72,21 @@ public class ReceptionTokenRing extends Thread {
 				int commandeType = Integer.valueOf(commandes[0]);
 				switch (commandeType){
 				case Cts.TOKEN :
-					System.out.println("Proc () " + myBean.getID() + " - Token recu de la part du : " + commandes[1]);
+					//System.out.println("Proc () " + myBean.getID() + " - Token recu de la part du : " + commandes[1]);
 					java.util.Date date= new java.util.Date();
 					procTokenRing.getInterface().setMessage("Token recu de la part du : " + commandes[1] + " | " + new Timestamp(date.getTime())  );
 					procTokenRing.setJAiLeToken(true);
 					procTokenRing.sendTokenToNeext();
 					break;
 				default:
-					System.out.println("Commande introuvable!");
+					//System.out.println("Commande introuvable!");
 				}
 			}
 		} catch (NumberFormatException e) {
-			System.out.println("Erreur NumberFormatException");
+			//System.out.println("Erreur NumberFormatException");
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.out.println("Erreur IOException 2");
+			//System.out.println("Erreur IOException 2");
 			e.printStackTrace();
 		}
 

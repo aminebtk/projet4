@@ -52,9 +52,9 @@ public class MediatorProcessus implements Runnable{
 
 		try {
 			while(true){
-				System.out.println("Le serveur intermediaire est pret pour accepter les connexions !");
+				//System.out.println("Le serveur intermediaire est pret pour accepter les connexions !");
 				socket = socketserver.accept();
-				System.out.println("Inter:Un precessus s'est connecté");
+				//System.out.println("Inter:Un precessus s'est connecté");
 				gestConProcList.add(new GestionnaireConnexionintermediaire(socket, this));
 			}
 		} catch (IOException e) {
@@ -91,7 +91,7 @@ public class MediatorProcessus implements Runnable{
 		for (GestionnaireConnexionintermediaire g : gestConProcListTmp){
 			for (GestionnaireConnexionintermediaire g1 : gestConProcListTmp){
 				if(g.getProcBean().getID()!=g1.getProcBean().getID()){
-					System.out.println("je suis " + g.getProcBean().getID() + " Send to " + g1.getProcBean().getID());
+					//System.out.println("je suis " + g.getProcBean().getID() + " Send to " + g1.getProcBean().getID());
 					String message = Cts.SUSCRIBE_PROC +"#"+g.getProcBean().getID() + 
 							"#" + g.getProcBean().getIp() + 
 							"#" + g.getProcBean().getPort() ;
