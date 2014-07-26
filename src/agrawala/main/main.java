@@ -12,7 +12,6 @@ public class main {
 		t.start();
 		new AgrawalaProcManager();	
 		new Ressource(Cts.IP_RESSOURCE , Cts.PORT_RESSOURCE );
-
-	}
+ 	}
 
 }

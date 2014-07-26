@@ -2,6 +2,8 @@ package agrawala.processus;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import agrawala.beans.ProcAgrawalaBean;
 import agrawala.beans.RequestRessource;
@@ -51,8 +53,8 @@ public class ReceptionProc implements Runnable {
 					case Cts.REPLY :
 						replyCount ++;
 						if(connexionMediator.getProcAgrawala().getListProc().size()==replyCount){
-							System.out.println("je rentre dans");
 							connexionMediator.getProcAgrawala().setStatut(Cts.AGRA_HELD);
+							connexionMediator.getProcAgrawala().setDelailAttente();
 							EmissionProcRessource t = new EmissionProcRessource(connexionMediator);//connexionMediator.getProcAgrawala().getMyBean());
 							t.start();
 							replyCount=0;

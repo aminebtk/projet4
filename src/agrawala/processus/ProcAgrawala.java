@@ -5,8 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import sun.awt.WindowClosingListener;
 import Util.Cts;
@@ -28,6 +30,7 @@ public class ProcAgrawala implements ActionListener, WindowListener {
 
 	private ProcAgrawalaFrame procTokenRingFrame;
 	private ConnexionMediator connexionMediator;
+	private Timestamp timeCounter;
 
 	public ProcAgrawala(int id, String AdresseIp, int Port){
 		requestRessource = new RequestRessource(id,Long.MAX_VALUE);
@@ -60,6 +63,8 @@ public class ProcAgrawala implements ActionListener, WindowListener {
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		if(arg0.getActionCommand().equals("demander")){
+			Date date= new Date();
+			timeCounter = new Timestamp(date.getTime());
 			connexionMediator.envoyerDemandeRes();	
 		}
 	}
@@ -170,6 +175,11 @@ public class ProcAgrawala implements ActionListener, WindowListener {
 	@Override
 	public void windowOpened(WindowEvent e) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	public void setDelailAttente() {
+		procTokenRingFrame.setDelaiAttente(timeCounter);
 		
 	}
 	

@@ -25,6 +25,8 @@ import javax.swing.JButton;
 import javax.swing.AbstractAction;
 
 import java.awt.event.ActionEvent;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.ArrayList;
 
 import javax.swing.Action;
@@ -48,6 +50,7 @@ public class ProcAgrawalaFrame extends JFrame {
 	private JLabel lblMessage;
 	private DefaultListModel<String> listModel;
 	private JLabel labelStatus;
+	private JLabel lblDelai;
 
 	/**
 	 * Create the frame.
@@ -139,6 +142,17 @@ public class ProcAgrawalaFrame extends JFrame {
 		btnNewButton.setActionCommand("demander");
 		btnNewButton.setBounds(183, 9, 169, 28);
 		panel.add(btnNewButton);
+		
+		lblDelai = new JLabel("");
+		lblDelai.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblDelai.setBounds(24, 145, 117, 20);
+		panel.add(lblDelai);
+		
+		JLabel lblDlaiDattente = new JLabel("D\u00E9lai d'attente :");
+		lblDlaiDattente.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDlaiDattente.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblDlaiDattente.setBounds(0, 130, 132, 20);
+		panel.add(lblDlaiDattente);
 
 		addWindowListener((WindowListener) controller);
 
@@ -181,5 +195,11 @@ public class ProcAgrawalaFrame extends JFrame {
 		if(s.equals(Cts.AGRA_WANTED))
 			labelStatus.setForeground(Color.RED);
 	}
-
+	
+	public void setDelaiAttente(Timestamp timeCounter){
+		Date date= new Date();
+		Timestamp t = new Timestamp(date.getTime());
+		long o =   t.getTime() - timeCounter.getTime();
+		lblDelai.setText("Attente : " + String.valueOf(o));
+	}
 }
